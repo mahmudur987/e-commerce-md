@@ -1,7 +1,8 @@
+import Link from "next/link";
 import React from "react";
+import Compair from "../icons/Compair";
 import QuickViewIco from "../icons/QuickViewIco";
 import ThinLove from "../icons/ThinLove";
-import Compair from "../icons/Compair";
 
 function ProductCardStyleThree({ datas }) {
   return (
@@ -13,21 +14,21 @@ function ProductCardStyleThree({ datas }) {
           alt=""
         />
         <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">
-          <a href="#">
+          <Link href="#">
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               <QuickViewIco />
             </span>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               <ThinLove />
             </span>
-          </a>
-          <a href="#">
+          </Link>
+          <link href="#">
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               <Compair />
             </span>
-          </a>
+          </link>
         </div>
         <div className="absolute w-full h-10 px-[30px]  left-0 -bottom-10 group-hover:bottom-5 transition-all duration-300 ease-in-out">
           <button

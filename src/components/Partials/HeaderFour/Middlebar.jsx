@@ -1,10 +1,10 @@
+import Link from "next/link";
 import Cart from "../../Cart";
 import Compair from "../../Helpers/icons/Compair";
 import ThinBag from "../../Helpers/icons/ThinBag";
 import ThinLove from "../../Helpers/icons/ThinLove";
 import ThinPeople from "../../Helpers/icons/ThinPeople";
 import SearchBox from "../../Helpers/SearchBox";
-import Link from "next/link";
 
 export default function Middlebar({ className }) {
   // const [toggleCart, setToggle] = useState(false);
@@ -32,9 +32,9 @@ export default function Middlebar({ className }) {
             <div className="flex space-x-6 items-center">
               <div className="compaire relative">
                 <Link href="/products-compaire" passHref>
-                  <a rel="noopener noreferrer">
+                  <>
                     <Compair />
-                  </a>
+                  </>
                 </Link>
                 <span className="w-[18px] h-[18px] rounded-full bg-qh4-pink absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] text-qblack">
                   2
@@ -42,9 +42,9 @@ export default function Middlebar({ className }) {
               </div>
               <div className="favorite relative">
                 <Link href="/wishlist" passHref>
-                  <a rel="noopener noreferrer">
+                  <>
                     <ThinLove />
-                  </a>
+                  </>
                 </Link>
                 <span className="w-[18px] h-[18px] rounded-full bg-qh4-pink absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] text-qblack">
                   1
@@ -53,9 +53,9 @@ export default function Middlebar({ className }) {
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer">
                   <Link href="/cart" passHref>
-                    <a rel="noopener noreferrer">
+                    <>
                       <ThinBag />
-                    </a>
+                    </>
                   </Link>
                   <span className="w-[18px] h-[18px] rounded-full bg-qh4-pink absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] text-qblack">
                     15
@@ -65,11 +65,11 @@ export default function Middlebar({ className }) {
               </div>
               <div>
                 <Link href="/profile#dashboard" passHref>
-                  <a rel="noopener noreferrer">
+                  <>
                     <span>
                     <ThinPeople />
                   </span>
-                  </a>
+                  </>
                 </Link>
               </div>
             </div>

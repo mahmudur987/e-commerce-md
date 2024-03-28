@@ -74,7 +74,7 @@ export default function BlogCard({ className, datas }) {
             {datas.article}
           </p>
           {/* view more btn */}
-          <a href="#">
+          <div>
             <div className="flex items-center space-x-2">
               <span className="text-qblack text-base font-semibold">
                 View More
@@ -98,7 +98,7 @@ export default function BlogCard({ className, datas }) {
                 </svg>
               </span>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>

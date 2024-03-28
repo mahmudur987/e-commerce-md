@@ -1,5 +1,5 @@
-import CountDown from "../Helpers/CountDown";
 import Link from "next/link";
+import CountDown from "../Helpers/CountDown";
 
 export default function CampaignCountDown({
   className,
@@ -130,24 +130,24 @@ export default function CampaignCountDown({
                   </h1>
                   <div className="flex space-x-5 items-center">
                     <div>
-                      <a href="#">
+                      <Link href="#">
                         <img
                           width="170"
                           height="69"
                           src={`/assets/images/play-store.png`}
                           alt=""
                         />
-                      </a>
+                      </Link>
                     </div>
                     <div>
-                      <a href="#">
+                      <Link href="#">
                         <img
                           width="170"
                           height="69"
                           src={`/assets/images/apple-store.png`}
                           alt=""
                         />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

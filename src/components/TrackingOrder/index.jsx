@@ -1,3 +1,4 @@
+import Link from "next/link";
 import InputCom from "../Helpers/InputCom";
 import PageTitle from "../Helpers/PageTitle";
 import Layout from "../Partials/Layout";
@@ -41,11 +42,11 @@ export default function TrackingOrder() {
                   />
                 </div>
 
-                <a href="#">
+                <Link href="#">
                   <div className="w-[142px] h-[50px] black-btn flex justify-center items-center">
                     <span>Track Now</span>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="flex-1 flex justify-center mt-5 lg:mt-0">
                 <Thumbnail />

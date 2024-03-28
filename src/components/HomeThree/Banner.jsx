@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { useRef } from "react";
 import SimpleSlider from "../Helpers/SliderCom";
-import Link from "next/link";
 
 export default function Banner({ className,}) {
   const sliderRef = useRef(null);
@@ -89,11 +89,8 @@ export default function Banner({ className,}) {
                             Explore Our Tech Collection Perfect Gadget
                           </h1>
 
-                          <Link
-                              href="#"
-                              passhref
-                          >
-                            <a rel="noopener noreferrer">
+                          <div       >
+                            <Link href="#" rel="noopener noreferrer">
                                 <div
                                     className={`w-[160px] h-[52px] flex justify-center items-center group rounded bg-qh3-blue text-white relative transition-all duration-300 ease-in-out overflow-hidden cursor-pointer ${
                                         className || ""
@@ -136,8 +133,8 @@ export default function Banner({ className,}) {
                                         className="w-full h-full bg-black absolute top-0 left-0 right-0 bottom-0 transform scale-x-0 group-hover:scale-x-100 origin-[center_left] group-hover:origin-[center_right]"
                                     ></div>
                                 </div>
-                            </a>
-                          </Link>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -164,9 +161,9 @@ export default function Banner({ className,}) {
 
                           <Link
                               href="#"
-                              passhref
+                              rel="noopener noreferrer"
                           >
-                            <a rel="noopener noreferrer">
+                            <span >
                                 <div
                                     className={`w-[160px] h-[52px] flex justify-center items-center group rounded bg-qh3-blue text-white relative transition-all duration-300 ease-in-out overflow-hidden cursor-pointer ${
                                         className || ""
@@ -209,7 +206,7 @@ export default function Banner({ className,}) {
                                         className="w-full h-full bg-black absolute top-0 left-0 right-0 bottom-0 transform scale-x-0 group-hover:scale-x-100 origin-[center_left] group-hover:origin-[center_right]"
                                     ></div>
                                 </div>
-                            </a>
+                            </span>
                           </Link>
                         </div>
                       </div>
@@ -237,9 +234,9 @@ export default function Banner({ className,}) {
 
                           <Link
                               href="#"
-                              passhref
+                              rel="noopener noreferrer"
                           >
-                            <a rel="noopener noreferrer">
+                            <span >
                               <div
                                   className={`w-[160px] h-[52px] flex justify-center items-center group rounded bg-qh3-blue text-white relative transition-all duration-300 ease-in-out overflow-hidden cursor-pointer ${
                                       className || ""
@@ -282,7 +279,7 @@ export default function Banner({ className,}) {
                                     className="w-full h-full bg-black absolute top-0 left-0 right-0 bottom-0 transform scale-x-0 group-hover:scale-x-100 origin-[center_left] group-hover:origin-[center_right]"
                                 ></div>
                               </div>
-                            </a>
+                            </span>
                           </Link>
                         </div>
                       </div>

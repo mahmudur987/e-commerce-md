@@ -59,11 +59,11 @@ export default function HeaderOne({ className, drawerAction, type = 1 }) {
           </div>
           <div className="cart relative cursor-pointer">
             <Link href="/cart" passHref>
-              <a rel="noopener noreferrer">
+              <>
                 <span>
                   <ThinBag />
                 </span>
-              </a>
+              </>
             </Link>
             <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow text-qblack'}`}>
               15

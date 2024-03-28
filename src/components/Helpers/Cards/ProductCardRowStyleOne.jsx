@@ -1,8 +1,8 @@
+import Link from "next/link";
 import Compair from "../icons/Compair";
 import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
 import ThinLove from "../icons/ThinLove";
-import Link from "next/link";
 
 export default function ProductCardRowStyleTwo({ className, datas,type }) {
   return (
@@ -51,21 +51,21 @@ export default function ProductCardRowStyleTwo({ className, datas,type }) {
         </div>
         {/* quick-access-btns */}
         <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-[30px]  transition-all duration-300 ease-in-out">
-          <a href="#">
+          <Link href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <QuickViewIco />
           </span>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <ThinLove />
           </span>
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <Compair />
           </span>
-          </a>
+          </Link>
         </div>
       </div>
   );

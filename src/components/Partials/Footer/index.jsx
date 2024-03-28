@@ -161,33 +161,33 @@ export default function Footer({ type }) {
                     <div className="flex lg:space-x-5 justify-between items-center mb-3">
                         <div className="flex space-x-5 items-center">
                             <Link href="#" passHref>
-                                <a rel="noopener noreferrer">
+                                <span>
                                     <Instagram className="fill-current text-qgray hover:text-qblack" />
-                                </a>
+                                </span>
                             </Link>
                             <Link href="#" passHref>
-                                <a rel="noopener noreferrer">
+                                <span>
                                     <Facebook className="fill-current text-qgray hover:text-qblack" />
 
-                                </a>
+                                </span>
                             </Link>
                             <Link href="#" passHref>
-                                <a rel="noopener noreferrer">
+                                <span>
                                     <Youtube className="fill-current text-qgray hover:text-qblack" />
 
-                                </a>
+                                </span>
                             </Link>
                         </div>
                         <span className="sm:text-base text-[10px] text-qgray font-300">
                             ©2022
-                            <a
+                            <Link
                                 href="https://quomodosoft.com/"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="font-500 text-qblack mx-1"
                             >
                                 Quomodosoft
-                            </a>
+                            </Link>
                             All rights reserved
                         </span>
                     </div>

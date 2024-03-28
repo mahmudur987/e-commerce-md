@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Cart from "../../Cart";
+import SearchBox from "../../Helpers/SearchBox";
 import Compair from "../../Helpers/icons/Compair";
 import ThinBag from "../../Helpers/icons/ThinBag";
 import ThinLove from "../../Helpers/icons/ThinLove";
 import ThinPeople from "../../Helpers/icons/ThinPeople";
-import SearchBox from "../../Helpers/SearchBox";
 
 export default function Middlebar({ className, type }) {
   return (
@@ -49,11 +49,11 @@ export default function Middlebar({ className, type }) {
             <div className="flex space-x-6 items-center">
               <div className="compaire relative">
                 <Link href="/products-compaire" passHref>
-                  <a rel="noopener noreferrer">
+                  <>
                     <span>
                       <Compair />
                     </span>
-                  </a>
+                  </>
 
                 </Link>
                 <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow'}`}>
@@ -62,11 +62,11 @@ export default function Middlebar({ className, type }) {
               </div>
               <div className="favorite relative">
                 <Link href="/wishlist" passHref>
-                  <a rel="noopener noreferrer">
+                  <>
                     <span>
                       <ThinLove />
                     </span>
-                  </a>
+                  </>
                 </Link>
                 <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow'}`}>
                   1
@@ -75,11 +75,11 @@ export default function Middlebar({ className, type }) {
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer">
                   <Link href="/cart" passHref>
-                    <a rel="noopener noreferrer">
+                    <>
                       <span>
                         <ThinBag />
                       </span>
-                    </a>
+                    </>
                   </Link>
                   <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow'}`}>
                     15
@@ -89,11 +89,11 @@ export default function Middlebar({ className, type }) {
               </div>
               <div>
                 <Link href="/profile#dashboard" passHref>
-                  <a rel="noopener noreferrer">
+                  <>
                     <span>
                       <ThinPeople />
                     </span>
-                  </a>
+                  </>
                 </Link>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Accodion from "../Helpers/Accodion";
 import InputCom from "../Helpers/InputCom";
 import PageTitle from "../Helpers/PageTitle";
@@ -108,11 +109,11 @@ humour, or randomised words"
                     ></textarea>
                   </div>
                   <div>
-                    <a href="#">
+                    <Link href="#">
                       <div className="black-btn text-sm font-semibold w-full h-[50px] flex justify-center items-center">
                         <span>Send Now</span>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

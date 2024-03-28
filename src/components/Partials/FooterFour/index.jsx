@@ -1,7 +1,7 @@
+import Link from "next/link";
 import Facebook from "../../Helpers/icons/Facebook";
 import Instagram from "../../Helpers/icons/Instagram";
 import Youtube from "../../Helpers/icons/Youtube";
-import Link from "next/link";
 
 export default function FooterFour() {
   return (
@@ -169,32 +169,32 @@ export default function FooterFour() {
           <div className="flex lg:space-x-5 justify-between items-center mb-3">
             <div className="flex space-x-5 items-center">
               <Link href="#" passHref>
-                <a rel="noopener noreferrer">
+                <span>
                   <Instagram className="fill-current text-white hover:text-[#9a9a9a]" />
-                </a>
+                </span>
               </Link>
               <Link href="#" passHref>
-                <a rel="noopener noreferrer">
+                <span>
                   <Facebook className="fill-current text-white hover:text-[#9a9a9a]" />
-                </a>
+                </span>
 
               </Link>
               <Link href="#"  passHref>
-                <a rel="noopener noreferrer">
+                <span>
                   <Youtube className="fill-current text-white hover:text-[#9a9a9a]" />
-                </a>
+                </span>
               </Link>
             </div>
             <span className="sm:text-base text-[10px] text-white font-300">
               ©2022
-              <a
+              <Link
                 href="https://quomodosoft.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="font-500 text-qh4-pink mx-1"
               >
                 Quomodosoft
-              </a>
+              </Link>
               All rights reserved
             </span>
           </div>
