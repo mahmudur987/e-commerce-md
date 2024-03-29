@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useGetCategoryProduct, useGetSingleCategory } from "../../utils/site";
 import CategoryCard from "./Cards/CategoryCard";
 import ProductCardStyleOne from "./Cards/ProductCardStyleOne";
 import DataIteration from "./DataIteration";
@@ -17,11 +18,16 @@ export default function SectionStyleOne({
     (value, index, array) => array.indexOf(value) === index
   );
   const [productLength] = useState(3);
-  // useEffect(() => {
-  //   if (window.matchMedia("(max-width: 1024px)")) {
-  //     setLength(2);
-  //   }
-  // }, []);
+  const {
+    data: category,
+    isLoading: categoryLoading,
+    isError: categoryIsError,
+    error: categoryError,
+  } = useGetSingleCategory();
+  const { data } = useGetCategoryProduct();
+
+  console.log(data);
+
   return (
     <div data-aos="fade-up" className={`section-style-one ${className || ""}`}>
       <ViewMoreTitle categoryTitle={sectionTitle} seeMoreUrl={seeMoreUrl}>
@@ -30,7 +36,7 @@ export default function SectionStyleOne({
             <div className="category-card hidden xl:block w-full">
               <CategoryCard
                 background={categoryBackground}
-                title={categoryTitle}
+                title={category ? category.name : ""}
                 brands={filterBrands}
               />
             </div>

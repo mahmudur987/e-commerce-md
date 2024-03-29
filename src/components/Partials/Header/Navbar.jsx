@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import Arrow from "../../Helpers/icons/Arrow";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useSiteSetting } from "../../../utils/Site";
+import Arrow from "../../Helpers/icons/Arrow";
 
 export default function Navbar({ className, type }) {
   const [categoryToggle, setToggle] = useState(false);
   const [elementsSize, setSize] = useState("0px");
-  // const getItems = document.querySelectorAll(`.categories-list li`).length;
-  // if (categoryToggle && getItems > 0) {
-  //   setSize(`${40 * getItems}px`);
-  // }
+  const { data, isError, isLoading } = useSiteSetting();
+
   const handler = () => {
     setToggle(!categoryToggle);
   };
@@ -33,6 +32,7 @@ export default function Navbar({ className, type }) {
         <div className="w-full h-full relative">
           <div className="w-full h-full flex justify-between items-center">
             <div className="category-and-nav flex xl:space-x-7 space-x-3 items-center">
+              {/* category search */}
               <div className="category w-[270px] h-[53px] bg-white px-5 rounded-t-md mt-[6px] relative">
                 <button
                   onClick={handler}
@@ -750,18 +750,22 @@ export default function Navbar({ className, type }) {
               </div>
               <div className="nav">
                 <ul className="nav-wrapper flex xl:space-x-10 space-x-5">
+                  {/* home */}
                   <li className="relative">
-                    <span
-                      className={`flex items-center text-sm font-600 cursor-pointer ${
-                        type === 3 ? "text-white" : "text-qblacktext"
-                      }`}
-                    >
-                      <span>Homepage</span>
-                      <span className="ml-1.5 ">
-                        <Arrow className="fill-current" />
+                    <Link href="/">
+                      <span
+                        className={`flex items-center text-sm font-600 cursor-pointer ${
+                          type === 3 ? "text-white" : "text-qblacktext"
+                        }`}
+                      >
+                        <span>Homepage</span>
+                        <span className="ml-1.5 ">
+                          <Arrow className="fill-current" />
+                        </span>
                       </span>
-                    </span>
-                    <div className="sub-menu w-[220px] absolute left-0 top-[60px]">
+                    </Link>
+
+                    {/* <div className="sub-menu w-[220px] absolute left-0 top-[60px]">
                       <div
                         className="w-full bg-white flex justify-between items-center "
                         style={{
@@ -802,11 +806,11 @@ export default function Navbar({ className, type }) {
                                 <li>
                                   <Link href="/home-four">
                                     <span
-                                        className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                            type === 3
-                                                ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                                : "hover:text-qyellow hover:border-qyellow"
-                                        }`}
+                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                        type === 3
+                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                          : "hover:text-qyellow hover:border-qyellow"
+                                      }`}
                                     >
                                       Home Three
                                     </span>
@@ -817,244 +821,254 @@ export default function Navbar({ className, type }) {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </li>
-                  <li>
-                    <span
-                      className={`flex items-center text-sm font-600 cursor-pointer ${
-                        type === 3 ? "text-white" : "text-qblacktext"
-                      }`}
-                    >
-                      <span>Shop</span>
-                      <span className="ml-1.5 ">
-                        <Arrow className="fill-current" />
-                      </span>
-                    </span>
-                    <div className="sub-menu w-full absolute left-0 top-[60px]">
-                      <div
-                        className="mega-menu-wrapper w-full bg-white p-[30px] flex justify-between items-center "
-                        style={{
-                          minHeight: "295px",
-                          boxShadow: "0px 15px 50px 0px rgba(0, 0, 0, 0.14)",
-                        }}
-                      >
-                        <div className="categories-wrapper flex-1 h-full flex justify-around -ml-[70px]">
-                          <div>
-                            <div className="category">
-                              <h1 className="text-[13px] font-700 text-qblack uppercase mb-[13px]">
-                                Shop List
-                              </h1>
+
+                  {/* shop */}
+                  {data &&
+                    !isError &&
+                    !isLoading &&
+                    data?.is_multi_vendor === true && (
+                      <li>
+                        <span
+                          className={`flex items-center text-sm font-600 cursor-pointer ${
+                            type === 3 ? "text-white" : "text-qblacktext"
+                          }`}
+                        >
+                          <span>Shop</span>
+                          <span className="ml-1.5 ">
+                            <Arrow className="fill-current" />
+                          </span>
+                        </span>
+                        <div className="sub-menu w-full absolute left-0 top-[60px]">
+                          <div
+                            className="mega-menu-wrapper w-full bg-white p-[30px] flex justify-between items-center "
+                            style={{
+                              minHeight: "295px",
+                              boxShadow:
+                                "0px 15px 50px 0px rgba(0, 0, 0, 0.14)",
+                            }}
+                          >
+                            <div className="categories-wrapper flex-1 h-full flex justify-around -ml-[70px]">
+                              <div>
+                                <div className="category">
+                                  <h1 className="text-[13px] font-700 text-qblack uppercase mb-[13px]">
+                                    Shop List
+                                  </h1>
+                                </div>
+                                <div className="category-items">
+                                  <ul className="flex flex-col space-y-2">
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Shop Sidebar
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Shop Fullwidth
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Shop Category Icon
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Shop Category Icon
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Shop List View
+                                        </span>
+                                      </Link>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="category">
+                                  <h1 className="text-[13px] font-700 text-qblack uppercase mb-[13px]">
+                                    Product Layouts
+                                  </h1>
+                                </div>
+                                <div className="category-items">
+                                  <ul className="flex flex-col space-y-2">
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Horizonral Thumbnail
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Vertical Thumbnail
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Gallery Thumbnail
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Sticky Summary
+                                        </span>
+                                      </Link>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="category">
+                                  <h1 className="text-[13px] font-700 text-qblack uppercase mb-[13px]">
+                                    Polular Category
+                                  </h1>
+                                </div>
+                                <div className="category-items">
+                                  <ul className="flex flex-col space-y-2">
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Phone & Tablet
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Gaming & Sports
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Home Appliance
+                                        </span>
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link href="/all-products">
+                                        <span
+                                          className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
+                                            type === 3
+                                              ? "hover:text-qh3-blue hover:border-qh3-blue"
+                                              : "hover:text-qyellow hover:border-qyellow"
+                                          }`}
+                                        >
+                                          Fashion Clothes
+                                        </span>
+                                      </Link>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
-                            <div className="category-items">
-                              <ul className="flex flex-col space-y-2">
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Shop Sidebar
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Shop Fullwidth
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Shop Category Icon
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Shop Category Icon
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Shop List View
-                                    </span>
-                                  </Link>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div>
-                            <div className="category">
-                              <h1 className="text-[13px] font-700 text-qblack uppercase mb-[13px]">
-                                Product Layouts
-                              </h1>
-                            </div>
-                            <div className="category-items">
-                              <ul className="flex flex-col space-y-2">
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Horizonral Thumbnail
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Vertical Thumbnail
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Gallery Thumbnail
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Sticky Summary
-                                    </span>
-                                  </Link>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div>
-                            <div className="category">
-                              <h1 className="text-[13px] font-700 text-qblack uppercase mb-[13px]">
-                                Polular Category
-                              </h1>
-                            </div>
-                            <div className="category-items">
-                              <ul className="flex flex-col space-y-2">
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Phone & Tablet
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Gaming & Sports
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Home Appliance
-                                    </span>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link href="/all-products">
-                                    <span
-                                      className={`text-qgray text-sm font-400 border-b border-transparent cursor-pointer   ${
-                                        type === 3
-                                          ? "hover:text-qh3-blue hover:border-qh3-blue"
-                                          : "hover:text-qyellow hover:border-qyellow"
-                                      }`}
-                                    >
-                                      Fashion Clothes
-                                    </span>
-                                  </Link>
-                                </li>
-                              </ul>
+                            <div className="thumbnil w-[348px] h-full">
+                              <div className="w-full h-[235px]">
+                                <img
+                                  width=""
+                                  src={`/assets/images/mega-menu-thumb.jpg`}
+                                  alt=""
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="thumbnil w-[348px] h-full">
-                          <div className="w-full h-[235px]">
-                            <img
-                              width=""
-                              src={`/assets/images/mega-menu-thumb.jpg`}
-                              alt=""
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                      </li>
+                    )}
+
+                  {/* pages */}
                   <li className="relative">
                     <span
                       className={`flex items-center text-sm font-600 cursor-pointer ${
@@ -1149,6 +1163,7 @@ export default function Navbar({ className, type }) {
                       </div>
                     </div>
                   </li>
+                  {/* about */}
                   <li>
                     <Link href="/about">
                       <span
@@ -1160,6 +1175,7 @@ export default function Navbar({ className, type }) {
                       </span>
                     </Link>
                   </li>
+                  {/* blog */}
                   <li>
                     <Link href="/blogs">
                       <span
@@ -1171,6 +1187,7 @@ export default function Navbar({ className, type }) {
                       </span>
                     </Link>
                   </li>
+                  {/* contact */}
                   <li>
                     <Link href="/contact">
                       <span
