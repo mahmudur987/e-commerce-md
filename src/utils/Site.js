@@ -1,11 +1,6 @@
 import { useQuery } from "react-query"
 import AXIOS from "./axios"
 
-
-
-
-
-
 export const useSiteSetting = () => {
     return useQuery({
         queryKey: ["settings-data"],
@@ -28,15 +23,12 @@ export const useAboutUsReview = () => {
 }
 
 
-export const useGetSingleCategory = () => {
+export const useGetAllCategories = () => {
     return useQuery({
-        queryKey: ["/api/category-list/"],
+        queryKey: ["category-list"],
         queryFn: async () => {
             const { data } = await AXIOS.get("/api/category-list/")
-            const randomIndex = Math.floor(Math.random() * arrayOfObjects.length);
-            const randomObject = data[randomIndex];
-
-            return randomObject
+            return data
         }
     })
 }

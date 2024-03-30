@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useGetCategoryProduct, useGetSingleCategory } from "../../utils/site";
+import { useEffect, useState } from "react";
+
+import { useGetAllCategories, useGetCategoryProduct } from "../../utils/Site";
 import CategoryCard from "./Cards/CategoryCard";
 import ProductCardStyleOne from "./Cards/ProductCardStyleOne";
 import DataIteration from "./DataIteration";
@@ -18,15 +19,31 @@ export default function SectionStyleOne({
     (value, index, array) => array.indexOf(value) === index
   );
   const [productLength] = useState(3);
+
+  const [category, setCategory] = useState({});
+
   const {
-    data: category,
+    data: categories,
     isLoading: categoryLoading,
     isError: categoryIsError,
     error: categoryError,
-  } = useGetSingleCategory();
-  const { data } = useGetCategoryProduct();
+  } = useGetAllCategories();
+  const {
+    data: allProducts,
+    isLoading: productsLoading,
+    isError: productsIsError,
+    error: productsError,
+  } = useGetCategoryProduct(category ? category?.name : "");
+  const productsBrand = allProducts?.map((x) => x.brand_name);
+  console.log(allProducts);
 
-  console.log(data);
+  useEffect(() => {
+    if (categories) {
+      const randomIndex = Math.floor(Math.random() * categories?.length);
+      const randomObject = categories[4];
+      setCategory(randomObject);
+    }
+  }, [categories]);
 
   return (
     <div data-aos="fade-up" className={`section-style-one ${className || ""}`}>
@@ -34,11 +51,20 @@ export default function SectionStyleOne({
         <div className="products-section w-full">
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5">
             <div className="category-card hidden xl:block w-full">
-              <CategoryCard
-                background={categoryBackground}
-                title={category ? category.name : ""}
-                brands={filterBrands}
-              />
+              {categories &&
+                allProducts &&
+                !categoryLoading &&
+                !productsLoading && (
+                  <CategoryCard
+                    background={
+                      allProducts
+                        ? allProducts[allProducts.length - 1]?.image
+                        : ""
+                    }
+                    title={category ? category.name : ""}
+                    brands={productsBrand}
+                  />
+                )}
             </div>
             <DataIteration
               datas={products}

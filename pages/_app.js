@@ -12,8 +12,6 @@ import "../styles/globals.css";
 import "../styles/loader.css";
 import "../styles/selectbox.css";
 function MyApp({ Component, pageProps }) {
-
-
   const queryClient = new QueryClient()
   useEffect(() => {
     AOS.init();
@@ -45,8 +43,6 @@ function MyApp({ Component, pageProps }) {
             <link rel="icon" href="/favicon.png" />
           </Head>
           <Component {...pageProps} />
-
-
 
         </Hydrate>
 
