@@ -4,11 +4,26 @@ import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
 import ThinLove from "../icons/ThinLove";
 
-export default function ProductCardStyleOne({ datas,type }) {
-  const available =
-    (datas.cam_product_sale /
-      (datas.cam_product_available + datas.cam_product_sale)) *
-    100;
+function calculateAverageRating(reviews) {
+  if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
+    return 0;
+  }
+
+  const totalRatings = reviews.reduce(
+    (accumulator, review) => accumulator + review.rating,
+    0
+  );
+  const averageRating = totalRatings / reviews.length;
+
+  return averageRating;
+}
+
+export default function ProductCardStyleOne({ datas, type }) {
+  const averageRating = calculateAverageRating(datas?.product_reviews);
+  console.log(averageRating);
+
+  const available = Number(datas?.available);
+
   return (
     <div
       className="product-card-one w-full h-full bg-white relative group overflow-hidden"
@@ -17,7 +32,7 @@ export default function ProductCardStyleOne({ datas,type }) {
       <div
         className="product-card-img w-full h-[300px]"
         style={{
-          background: `url(/assets/images/${datas.image}) no-repeat center`,
+          background: `url(/assets/images/${datas?.image}) no-repeat center`,
         }}
       >
         {/* product available progress */}
@@ -29,7 +44,7 @@ export default function ProductCardStyleOne({ datas,type }) {
                   Prodcuts Available
                 </p>
                 <span className="text-sm text-qblack font-600 leading-6">
-                  {datas.cam_product_available}
+                  {Number(datas?.available)}
                 </span>
               </div>
               <div className="progress w-full h-[5px] rounded-[22px] bg-primarygray relative overflow-hidden">
@@ -37,21 +52,23 @@ export default function ProductCardStyleOne({ datas,type }) {
                   style={{
                     width: `${datas.campaingn_product ? 100 - available : 0}%`,
                   }}
-                  className={`h-full absolute left-0 top-0  ${type===3?'bg-qh3-blue':'bg-qyellow'}`}
+                  className={`h-full absolute left-0 top-0  ${
+                    type === 3 ? "bg-qh3-blue" : "bg-qyellow"
+                  }`}
                 ></div>
               </div>
             </div>
           </>
         )}
         {/* product type */}
-        {datas.product_type && !datas.campaingn_product && (
+        {datas.is_popular && (
           <div className="product-type absolute right-[14px] top-[17px]">
             <span
               className={`text-[9px] font-700 leading-none py-[6px] px-3 uppercase text-white rounded-full tracking-wider ${
                 datas.product_type === "popular" ? "bg-[#19CC40]" : "bg-qyellow"
               }`}
             >
-              {datas.product_type}
+              popular
             </span>
           </div>
         )}
@@ -59,7 +76,10 @@ export default function ProductCardStyleOne({ datas,type }) {
       <div className="product-card-details px-[30px] pb-[30px] relative">
         {/* add to card button */}
         <div className="absolute w-full h-10 px-[30px] left-0 top-40 group-hover:top-[85px] transition-all duration-300 ease-in-out">
-          <button type="button" className={type===3?'blue-btn':'yellow-btn'}>
+          <button
+            type="button"
+            className={type === 3 ? "blue-btn" : "yellow-btn"}
+          >
             <div className="flex items-center space-x-3">
               <span>
                 <svg
@@ -77,16 +97,21 @@ export default function ProductCardStyleOne({ datas,type }) {
             </div>
           </button>
         </div>
-        <div className="reviews flex space-x-[1px] mb-3">
-          {Array.from(Array(datas.review), () => (
-            <span key={datas.review + Math.random()}>
-              <Star />
-            </span>
-          ))}
-        </div>
+
+        {/* rating title price  */}
+
+        {datas?.product_reviews?.length > 0 && (
+          <div className="reviews flex space-x-[1px] mb-3">
+            {Array.from(Array(Math.floor(averageRating)), () => (
+              <span key={datas.review + Math.random()}>
+                <Star />
+              </span>
+            ))}
+          </div>
+        )}
         <Link href="/single-product">
           <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
-            {datas.title}
+            {datas.name}
           </p>
         </Link>
         <p className="price">
@@ -94,10 +119,11 @@ export default function ProductCardStyleOne({ datas,type }) {
             {datas.price}
           </span>
           <span className="offer-price text-qred font-600 text-[18px] ml-2">
-            {datas.offer_price}
+            {datas.price}
           </span>
         </p>
       </div>
+
       {/* quick-access-btns */}
       <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">
         <Link href="#">

@@ -11,15 +11,9 @@ export default function SectionStyleOne({
   categoryTitle,
   sectionTitle,
   seeMoreUrl,
-  brands = [],
-  products = [],
+
   categoryBackground,
 }) {
-  const filterBrands = brands.filter(
-    (value, index, array) => array.indexOf(value) === index
-  );
-  const [productLength] = useState(3);
-
   const [category, setCategory] = useState({});
 
   const {
@@ -29,13 +23,13 @@ export default function SectionStyleOne({
     error: categoryError,
   } = useGetAllCategories();
   const {
-    data: allProducts,
+    data: products,
     isLoading: productsLoading,
     isError: productsIsError,
     error: productsError,
   } = useGetCategoryProduct(category ? category?.name : "");
-  const productsBrand = allProducts?.map((x) => x.brand_name);
-  console.log(allProducts);
+  const brands = products?.map((x) => x.brand_name);
+  console.log(products);
 
   useEffect(() => {
     if (categories) {
@@ -52,25 +46,19 @@ export default function SectionStyleOne({
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5">
             <div className="category-card hidden xl:block w-full">
               {categories &&
-                allProducts &&
+                products &&
                 !categoryLoading &&
                 !productsLoading && (
                   <CategoryCard
                     background={
-                      allProducts
-                        ? allProducts[allProducts.length - 1]?.image
-                        : ""
+                      products ? products[products.length - 1]?.image : ""
                     }
                     title={category ? category.name : ""}
-                    brands={productsBrand}
+                    brands={brands}
                   />
                 )}
             </div>
-            <DataIteration
-              datas={products}
-              startLength={0}
-              endLength={productLength}
-            >
+            <DataIteration datas={products} startLength={0} endLength={3}>
               {({ datas }) => (
                 <div key={datas.id} className="item">
                   <ProductCardStyleOne datas={datas} />

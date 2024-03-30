@@ -1,8 +1,10 @@
 import { useState } from "react";
-import productDatas from "../../data/products.json";
+import { useGetAllProduct } from "../../utils/products";
 import BreadcrumbCom from "../BreadcrumbCom";
+import ErrorComponent from "../Error/ErrorComponent";
 import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
 import DataIteration from "../Helpers/DataIteration";
+import LoadingSpinner from "../Loader/LoadingSpinar";
 import Layout from "../Partials/Layout";
 import ProductsFilter from "./ProductsFilter";
 
@@ -43,15 +45,23 @@ export default function AllProductPage() {
     }));
   };
   const [volume, setVolume] = useState([30, 60]);
-
   const [storage, setStorage] = useState(null);
   const filterStorage = (value) => {
     setStorage(value);
   };
   const [filterToggle, setToggle] = useState(false);
+  const { data: products, isLoading, isError, error } = useGetAllProduct();
 
-  const { products } = productDatas;
-
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (isError) {
+    return (
+      <ErrorComponent
+        message={error ? error.message : "can not load the data"}
+      />
+    );
+  }
   return (
     <>
       <Layout>
@@ -130,27 +140,37 @@ export default function AllProductPage() {
                   </button>
                 </div>
                 <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  xl:gap-[30px] gap-5 mb-[40px]">
-                  <DataIteration datas={products} startLength={0} endLength={6}>
-                    {({ datas }) => (
-                      <div data-aos="fade-up" key={datas.id}>
-                        <ProductCardStyleOne datas={datas} />
-                      </div>
-                    )}
-                  </DataIteration>
+                  {products && products.length > 0 ? (
+                    <DataIteration
+                      datas={products}
+                      startLength={0}
+                      endLength={products?.length}
+                    >
+                      {({ datas }) => (
+                        <div data-aos="fade-up" key={datas.id}>
+                          <ProductCardStyleOne datas={datas} />
+                        </div>
+                      )}
+                    </DataIteration>
+                  ) : (
+                    <ErrorComponent message={"No data to show"} />
+                  )}
                 </div>
 
-                <div className="w-full h-[164px] overflow-hidden mb-[40px]">
+                {/* below banner */}
+                {/* <div className="w-full h-[164px] overflow-hidden mb-[40px]">
                   <img
                     src={`/assets/images/ads-6.png`}
                     alt=""
                     className="w-full h-full object-contain"
                   />
-                </div>
-                <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5 mb-[40px]">
+                </div> */}
+                {/* below */}
+                {/* <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5 mb-[40px]">
                   <DataIteration
                     datas={products}
                     startLength={6}
-                    endLength={15}
+                    endLength={products?.length}
                   >
                     {({ datas }) => (
                       <div data-aos="fade-up" key={datas.id}>
@@ -158,7 +178,7 @@ export default function AllProductPage() {
                       </div>
                     )}
                   </DataIteration>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
