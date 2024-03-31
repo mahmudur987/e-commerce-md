@@ -8,8 +8,10 @@ import Layout from "../Partials/Layout";
 import ProductView from "./ProductView";
 import Reviews from "./Reviews";
 import SallerInfo from "./SallerInfo";
-
+import { useRouter } from "next/router";
 export default function SingleProductPage() {
+  const router = useRouter();
+
   const [tab, setTab] = useState("des");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -20,6 +22,8 @@ export default function SingleProductPage() {
   const [reviewLoading, setLoading] = useState(false);
   const reviewElement = useRef(null);
   const [report, setReport] = useState(false);
+  // console.log(r)
+
   const [commnets, setComments] = useState([
     {
       id: Math.random(),

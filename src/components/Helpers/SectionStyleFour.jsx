@@ -14,21 +14,21 @@ export default function SectionStyleFour({
         <div className="products-section w-full">
           <div className="grid lg:grid-cols-3 grid-cols-1 xl:gap-[30px] lg:gap-5">
             <div className="item-col">
-              <DataIteration datas={products} startLength={0} endLength={4}>
+              <DataIteration datas={products} startLength={0} endLength={2}>
                 {({ datas }) => (
                   <ProductCardRowStyleTwo key={datas.id} datas={datas} />
                 )}
               </DataIteration>
             </div>
             <div className="item-col">
-              <DataIteration datas={products} startLength={4} endLength={8}>
+              <DataIteration datas={products} startLength={0} endLength={2}>
                 {({ datas }) => (
                   <ProductCardRowStyleTwo key={datas.id} datas={datas} />
                 )}
               </DataIteration>
             </div>
             <div className="item-col">
-              <DataIteration datas={products} startLength={8} endLength={12}>
+              <DataIteration datas={products} startLength={0} endLength={2}>
                 {({ datas }) => (
                   <ProductCardRowStyleTwo key={datas.id} datas={datas} />
                 )}

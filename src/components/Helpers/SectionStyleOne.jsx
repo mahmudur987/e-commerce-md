@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-
-import { useGetAllCategories, useGetCategoryProduct } from "../../utils/Site";
+import ErrorComponent from "../Error/ErrorComponent";
+import LoadingSpinner from "../Loader/LoadingSpinar";
 import CategoryCard from "./Cards/CategoryCard";
 import ProductCardStyleOne from "./Cards/ProductCardStyleOne";
 import DataIteration from "./DataIteration";
@@ -11,60 +10,54 @@ export default function SectionStyleOne({
   categoryTitle,
   sectionTitle,
   seeMoreUrl,
-
+  products,
+  brands,
+  categories,
   categoryBackground,
+  endLength,
+  loading,
+  isError,
+  error,
 }) {
-  const [category, setCategory] = useState({});
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
-  const {
-    data: categories,
-    isLoading: categoryLoading,
-    isError: categoryIsError,
-    error: categoryError,
-  } = useGetAllCategories();
-  const {
-    data: products,
-    isLoading: productsLoading,
-    isError: productsIsError,
-    error: productsError,
-  } = useGetCategoryProduct(category ? category?.name : "");
-  const brands = products?.map((x) => x.brand_name);
-  console.log(products);
-
-  useEffect(() => {
-    if (categories) {
-      const randomIndex = Math.floor(Math.random() * categories?.length);
-      const randomObject = categories[4];
-      setCategory(randomObject);
-    }
-  }, [categories]);
+  if (isError) {
+    return <ErrorComponent message={error ? error.message : "Error "} />;
+  }
 
   return (
     <div data-aos="fade-up" className={`section-style-one ${className || ""}`}>
       <ViewMoreTitle categoryTitle={sectionTitle} seeMoreUrl={seeMoreUrl}>
         <div className="products-section w-full">
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5">
-            <div className="category-card hidden xl:block w-full">
-              {categories &&
-                products &&
-                !categoryLoading &&
-                !productsLoading && (
+            {categories && (
+              <div className="category-card hidden xl:block w-full">
+                {categories && (
                   <CategoryCard
                     background={
                       products ? products[products.length - 1]?.image : ""
                     }
-                    title={category ? category.name : ""}
+                    title={categories ? categories[4].name : ""}
                     brands={brands}
                   />
                 )}
-            </div>
-            <DataIteration datas={products} startLength={0} endLength={3}>
-              {({ datas }) => (
-                <div key={datas.id} className="item">
-                  <ProductCardStyleOne datas={datas} />
-                </div>
-              )}
-            </DataIteration>
+              </div>
+            )}
+            {products && products?.length > 0 && (
+              <DataIteration
+                datas={products}
+                startLength={0}
+                endLength={endLength ? endLength : 3}
+              >
+                {({ datas }) => (
+                  <div key={datas.id} className="item">
+                    <ProductCardStyleOne datas={datas} />
+                  </div>
+                )}
+              </DataIteration>
+            )}
           </div>
         </div>
       </ViewMoreTitle>

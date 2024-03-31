@@ -4,7 +4,7 @@ import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
 import ThinLove from "../icons/ThinLove";
 
-function calculateAverageRating(reviews) {
+export function calculateAverageRating(reviews) {
   if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
     return 0;
   }
@@ -20,7 +20,6 @@ function calculateAverageRating(reviews) {
 
 export default function ProductCardStyleOne({ datas, type }) {
   const averageRating = calculateAverageRating(datas?.product_reviews);
-  console.log(averageRating);
 
   const available = Number(datas?.available);
 
@@ -109,7 +108,7 @@ export default function ProductCardStyleOne({ datas, type }) {
             ))}
           </div>
         )}
-        <Link href="/single-product">
+        <Link href={`/singleProduct/${datas.id}`}>
           <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
             {datas.name}
           </p>
