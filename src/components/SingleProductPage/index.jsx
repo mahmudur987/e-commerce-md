@@ -1,5 +1,10 @@
+import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import data from "../../data/products.json";
+import {
+  useGetProductDetails,
+  useGetRelatedProducts,
+} from "../../utils/products";
 import BreadcrumbCom from "../BreadcrumbCom";
 import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
 import DataIteration from "../Helpers/DataIteration";
@@ -8,7 +13,6 @@ import Layout from "../Partials/Layout";
 import ProductView from "./ProductView";
 import Reviews from "./Reviews";
 import SallerInfo from "./SallerInfo";
-import { useRouter } from "next/router";
 export default function SingleProductPage() {
   const router = useRouter();
 
@@ -22,7 +26,10 @@ export default function SingleProductPage() {
   const [reviewLoading, setLoading] = useState(false);
   const reviewElement = useRef(null);
   const [report, setReport] = useState(false);
-  // console.log(r)
+  const { data: singleProduct } = useGetProductDetails(router.query.id);
+  const { data: products } = useGetRelatedProducts(router.query.id);
+
+  console.log(products);
 
   const [commnets, setComments] = useState([
     {
@@ -246,9 +253,9 @@ export default function SingleProductPage() {
                   className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5"
                 >
                   <DataIteration
-                    datas={data.products}
-                    startLength={5}
-                    endLength={9}
+                    datas={products}
+                    startLength={0}
+                    endLength={products?.length < 4 ? products?.length : 4}
                   >
                     {({ datas }) => (
                       <div key={datas.id} className="item">

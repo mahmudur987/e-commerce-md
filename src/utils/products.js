@@ -10,6 +10,24 @@ export const useGetAllProduct = (filter) => {
         }
     })
 }
+export const useGetProductDetails = (id) => {
+    return useQuery({
+        queryKey: [id],
+        queryFn: async () => {
+            const { data } = await AXIOS.get(`/api/products/${id}`)
+            return data
+        }
+    })
+}
+export const useGetRelatedProducts = (id) => {
+    return useQuery({
+        queryKey: [id, "related-products"],
+        queryFn: async () => {
+            const { data } = await AXIOS.get(`/api/products/${id}/related-products/`)
+            return data
+        }
+    })
+}
 export const useGetAllBrands = (filter) => {
     return useQuery({
         queryKey: ["brand-list"],

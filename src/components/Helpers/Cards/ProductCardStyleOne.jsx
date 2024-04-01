@@ -31,7 +31,8 @@ export default function ProductCardStyleOne({ datas, type }) {
       <div
         className="product-card-img w-full h-[300px]"
         style={{
-          background: `url(/assets/images/${datas?.image}) no-repeat center`,
+          background: `url(${datas?.image}) no-repeat center `,
+          backgroundSize: "cover",
         }}
       >
         {/* product available progress */}
@@ -43,7 +44,7 @@ export default function ProductCardStyleOne({ datas, type }) {
                   Prodcuts Available
                 </p>
                 <span className="text-sm text-qblack font-600 leading-6">
-                  {Number(datas?.available)}
+                  {datas?.available}
                 </span>
               </div>
               <div className="progress w-full h-[5px] rounded-[22px] bg-primarygray relative overflow-hidden">

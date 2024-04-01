@@ -146,11 +146,11 @@ export default function Home() {
           error={ppError}
         />
 
-        {/* <ProductsAds
-          ads={[`/assets/images/ads-3.png`]}
+        <ProductsAds
+          ads={[`/../../../public/assets/images/bg (1).jpg`]}
           className="products-ads-section mb-[60px]"
           sectionHeight="sm:h-[295px] h-full"
-        /> */}
+        />
 
         {/* new arrival */}
         <SectionStyleThree
