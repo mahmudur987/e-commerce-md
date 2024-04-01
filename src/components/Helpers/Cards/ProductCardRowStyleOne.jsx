@@ -8,8 +8,6 @@ import { calculateAverageRating } from "./ProductCardStyleOne";
 export default function ProductCardRowStyleTwo({ className, datas, type }) {
   const averageRating = calculateAverageRating(datas?.product_reviews);
 
-  console.log(datas);
-
   return (
     <div
       data-aos="fade-left"

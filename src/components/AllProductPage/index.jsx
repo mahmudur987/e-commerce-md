@@ -9,6 +9,7 @@ import Layout from "../Partials/Layout";
 import ProductsFilter from "./ProductsFilter";
 
 export default function AllProductPage() {
+  const { data: products, isLoading, isError, error } = useGetAllProduct();
   const [filters, setFilter] = useState({
     mobileLaptop: false,
     gaming: false,
@@ -40,7 +41,6 @@ export default function AllProductPage() {
   const checkboxHandler = (e) => {
     const { name } = e.target;
     setFilter((prevState) => ({
-      ...prevState,
       [name]: !prevState[name],
     }));
   };
@@ -50,7 +50,6 @@ export default function AllProductPage() {
     setStorage(value);
   };
   const [filterToggle, setToggle] = useState(false);
-  const { data: products, isLoading, isError, error } = useGetAllProduct();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -82,20 +81,21 @@ export default function AllProductPage() {
                   className="mb-[30px]"
                 />
                 {/* ads */}
-                <div className="w-full hidden lg:block h-[295px]">
+                {/* <div className="w-full hidden lg:block h-[295px]">
                   <img
                     src={`/assets/images/ads-5.png`}
                     alt=""
                     className="w-full h-full object-contain"
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="flex-1">
                 <div className="products-sorting w-full bg-white md:h-[70px] flex md:flex-row flex-col md:space-y-0 space-y-5 md:justify-between md:items-center p-[30px] mb-[40px]">
                   <div>
                     <p className="font-400 text-[13px]">
-                      <span className="text-qgray"> Showing</span> 1–16 of 66
+                      <span className="text-qgray"> Showing</span> 1–{" "}
+                      {products.length} {"  "}
                       results
                     </p>
                   </div>

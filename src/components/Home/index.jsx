@@ -19,6 +19,10 @@ import Banner from "./Banner";
 import BestSellers from "./BestSellers";
 import BrandSection from "./BrandSection";
 import ProductsAds from "./ProductsAds";
+
+import banner1 from "../../../public/assets/banner/banner (1).jpg";
+import banner2 from "../../../public/assets/banner/banner (2).jpg";
+
 export default function Home() {
   const {
     data: TopSelling,
@@ -126,7 +130,7 @@ export default function Home() {
         {/* add */}
 
         <ProductsAds
-          ads={[`/assets/images/ads-1.png`, `/assets/images/ads-2.png`]}
+          ads={[banner1, banner2]}
           sectionHeight="sm:h-[295px] h-full"
           className="products-ads-section mb-[60px]"
         />

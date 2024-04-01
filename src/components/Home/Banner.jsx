@@ -1,5 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
-
+import banner1 from "../../../public/assets/banner/banner (1).jpg";
+import banner2 from "../../../public/assets/banner/banner (2).jpg";
+import banner3 from "../../../public/assets/banner/banner (3).jpg";
 export default function Banner({ className }) {
   return (
     <>
@@ -10,12 +13,11 @@ export default function Banner({ className }) {
               <div data-aos="fade-right" className="xl:w-[740px] w-full h-full">
                 <Link href="/single-product">
                   <picture>
-                    <source
-                      media="(min-width:1025px)"
-                      srcSet={`/assets/images/banner-1.png`}
-                    />
-                    <img
-                      src={`/assets/images/banner-1.2.png`}
+                    <source media="(min-width:1025px)" srcSet={banner1} />
+                    <Image
+                      width={600}
+                      height={800}
+                      src={banner1}
                       alt=""
                       className="w-full max-w-full h-auto object-cover"
                     />
@@ -28,8 +30,10 @@ export default function Banner({ className }) {
               >
                 <div className="w-full xl:h-1/2">
                   <Link href="/single-product">
-                    <img
-                      src={`/assets/images/banner-2.png`}
+                    <Image
+                      width={400}
+                      height={300}
+                      src={banner2}
                       alt=""
                       className="w-full h-full"
                     />
@@ -37,9 +41,11 @@ export default function Banner({ className }) {
                 </div>
                 <div className="w-full xl:h-1/2">
                   <Link href="/single-product">
-                    <img
-                      src={`/assets/images/banner-3.png`}
-                      alt=""
+                    <Image
+                      width={300}
+                      height={300}
+                      src={banner3}
+                      alt="banner"
                       className="w-full h-full"
                     />
                   </Link>
