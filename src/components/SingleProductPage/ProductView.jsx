@@ -1,26 +1,59 @@
 import { useState } from "react";
 import Star from "../Helpers/icons/Star";
-import Selectbox from "../Helpers/Selectbox";
 
-export default function ProductView({ className, reportHandler }) {
+export function calculateAverageRating(reviews) {
+  if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
+    return 0;
+  }
+
+  const totalRatings = reviews.reduce(
+    (accumulator, review) => accumulator + review.rating,
+    0
+  );
+  const averageRating = totalRatings / reviews.length;
+
+  return averageRating;
+}
+export default function ProductView({
+  className,
+  reportHandler,
+  singleProduct,
+}) {
+  console.log(singleProduct);
+
+  const {
+    category_name,
+    name: productName,
+    product_reviews,
+    price,
+    description,
+    product_slider,
+    image,
+  } = singleProduct || {};
+  const averageRating = calculateAverageRating(product_reviews);
   const productsImg = [
     {
       id: 1,
       src: "product-details-1.png",
       color: "#FFBC63",
+      image,
     },
     {
       id: 2,
       src: "product-details-2.png",
       color: "#649EFF",
+      image,
     },
     {
       id: 3,
       src: "product-details-3.png",
+      image,
       color: "#FFFFFF",
     },
     {
       id: 4,
+      image,
+
       src: "product-details-4.png",
       color: "#FF7173",
     },
@@ -28,6 +61,7 @@ export default function ProductView({ className, reportHandler }) {
       id: 6,
       src: "product-details-5.png",
       color: "",
+      image,
     },
   ];
 
@@ -55,7 +89,7 @@ export default function ProductView({ className, reportHandler }) {
         <div className="w-full">
           <div className="w-full h-[600px] border border-qgray-border flex justify-center items-center overflow-hidden relative mb-3">
             <img
-              src={`/assets/images/${src}`}
+              src={image ?? `/assets/images/${src}`}
               alt=""
               className="object-contain"
             />
@@ -73,7 +107,7 @@ export default function ProductView({ className, reportHandler }) {
                   className="w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer"
                 >
                   <img
-                    src={`/assets/images/${img.src}`}
+                    src={img.image ?? `/assets/images/${img.src}`}
                     alt=""
                     className={`w-full h-full object-contain ${
                       src !== img.src ? "opacity-50" : ""
@@ -90,13 +124,13 @@ export default function ProductView({ className, reportHandler }) {
             data-aos="fade-up"
             className="text-qgray text-xs font-normal uppercase tracking-wider mb-2 inline-block"
           >
-            Mobile Phones
+            {category_name}
           </span>
           <p
             data-aos="fade-up"
             className="text-xl font-medium text-qblack mb-4"
           >
-            Samsung Galaxy Z Fold3 5G 3 colors in 512GB
+            {productName}
           </p>
 
           <div
@@ -104,33 +138,33 @@ export default function ProductView({ className, reportHandler }) {
             className="flex space-x-[10px] items-center mb-6"
           >
             <div className="flex">
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-              <Star />
+              {Array.from(Array(Math.floor(averageRating)), () => (
+                <span key={averageRating + Math.random()}>
+                  <Star />
+                </span>
+              ))}
             </div>
             <span className="text-[13px] font-normal text-qblack">
-              6 Reviews
+              {product_reviews.length} Reviews
             </span>
           </div>
 
           <div data-aos="fade-up" className="flex space-x-2 items-center mb-7">
             <span className="text-sm font-500 text-qgray line-through mt-2">
-              $9.99
+              {price + 200}
             </span>
-            <span className="text-2xl font-500 text-qred">$6.99</span>
+            <span className="text-2xl font-500 text-qred">{price}</span>
           </div>
 
           <p
             data-aos="fade-up"
             className="text-qgray text-sm text-normal mb-[30px] leading-7"
           >
-            It is a long established fact that a reader will be distracted by
-            the readable there content of a page when looking at its layout.
+            {description}
           </p>
+          {/* color */}
 
-          <div data-aos="fade-up" className="colors mb-[30px]">
+          {/* <div data-aos="fade-up" className="colors mb-[30px]">
             <span className="text-sm font-normal uppercase text-qgray mb-[14px] inline-block">
               COLOR
             </span>
@@ -156,9 +190,11 @@ export default function ProductView({ className, reportHandler }) {
                   </div>
                 ))}
             </div>
-          </div>
+          </div> */}
 
-          <div data-aos="fade-up" className="product-size mb-[30px]">
+          {/* size */}
+
+          {/* <div data-aos="fade-up" className="product-size mb-[30px]">
             <span className="text-sm font-normal uppercase text-qgray mb-[14px] inline-block">
               SIZE
             </span>
@@ -197,8 +233,9 @@ export default function ProductView({ className, reportHandler }) {
                 </Selectbox>
               </div>
             </div>
-          </div>
+          </div> */}
 
+          {/* add to cart  */}
           <div
             data-aos="fade-up"
             className="quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px]"
@@ -255,10 +292,10 @@ export default function ProductView({ className, reportHandler }) {
 
           <div data-aos="fade-up" className="mb-[20px]">
             <p className="text-[13px] text-qgray leading-7">
-              <span className="text-qblack">Category :</span> Kitchen
+              <span className="text-qblack">Category :</span> {category_name}
             </p>
             <p className="text-[13px] text-qgray leading-7">
-              <span className="text-qblack">Tags :</span> Beer, Foamer
+              <span className="text-qblack">Tags :</span> laptop,
             </p>
             <p className="text-[13px] text-qgray leading-7">
               <span className="text-qblack">SKU:</span> KE-91039

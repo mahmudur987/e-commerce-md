@@ -1,21 +1,22 @@
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import data from "../../data/products.json";
 import {
   useGetProductDetails,
   useGetRelatedProducts,
 } from "../../utils/products";
 import BreadcrumbCom from "../BreadcrumbCom";
+import ErrorComponent from "../Error/ErrorComponent";
 import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
 import DataIteration from "../Helpers/DataIteration";
 import InputCom from "../Helpers/InputCom";
+import LoadingSpinner from "../Loader/LoadingSpinar";
 import Layout from "../Partials/Layout";
 import ProductView from "./ProductView";
 import Reviews from "./Reviews";
 import SallerInfo from "./SallerInfo";
 export default function SingleProductPage() {
   const router = useRouter();
-
   const [tab, setTab] = useState("des");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -26,42 +27,43 @@ export default function SingleProductPage() {
   const [reviewLoading, setLoading] = useState(false);
   const reviewElement = useRef(null);
   const [report, setReport] = useState(false);
-  const { data: singleProduct } = useGetProductDetails(router.query.id);
+  const {
+    data: singleProduct,
+    isLoading,
+    isError,
+    error,
+  } = useGetProductDetails(router.query.id);
   const { data: products } = useGetRelatedProducts(router.query.id);
 
-  console.log(products);
+  const [commnets, setComments] = useState([ ]);
 
-  const [commnets, setComments] = useState([
-    {
-      id: Math.random(),
-      author: "Rafiqul Islam",
-      comments: `Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the redi 1500s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book. It
-                has survived not only five centuries but also the on leap into
-                electronic typesetting, remaining`,
-      review: 4,
-      replys: [
-        {
-          id: Math.random(),
-          name: "Willium Kingson",
-          comments: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`,
-        },
-      ],
-    },
-    {
-      id: Math.random(),
-      author: "Abdullah Mamun",
-      comments: `Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the redi 1500s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book. It
-                has survived not only five centuries but also the on leap into
-                electronic typesetting, remaining`,
-      review: 5,
-    },
-  ]);
+  useEffect(() => {
+
+    if(singleProduct?.product_reviews.length===0){
+
+      setComments([])
+      
+      }
+
+  else{
+   const reviews = singleProduct?.product_reviews.map((x) => {
+    return (
+      {
+        id: x?.id,
+        author: x?.name,
+        comments: x?.review_text,
+        review: x?.rating,
+        image:x?.image
+      },
+   
+    );
+  });
+  setComments(reviews)
+
+}
+ 
+  }, [singleProduct]);
+
   const reviewAction = () => {
     setLoading(true);
     setTimeout(() => {
@@ -92,7 +94,12 @@ export default function SingleProductPage() {
       return false;
     }, 2000);
   };
-
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (isError) {
+    return <ErrorComponent message={error ? error.message : "Error"} />;
+  }
   return (
     <>
       <Layout childrenClasses="pt-0 pb-0">
@@ -110,7 +117,10 @@ export default function SingleProductPage() {
             </div>
             <div className="w-full bg-white pb-[60px]">
               <div className="container-x mx-auto">
-                <ProductView reportHandler={() => setReport(!report)} />
+                <ProductView
+                  singleProduct={singleProduct}
+                  reportHandler={() => setReport(!report)}
+                />
               </div>
             </div>
           </div>
@@ -146,7 +156,10 @@ export default function SingleProductPage() {
                       Reviews
                     </span>
                   </li>
-                  <li>
+
+{/* seller info */}
+
+                  {/* <li>
                     <span
                       onClick={() => setTab("info")}
                       className={`py-[15px] sm:text-[15px] text-sm sm:block border-b font-medium cursor-pointer ${
@@ -157,7 +170,7 @@ export default function SingleProductPage() {
                     >
                       Seller Info
                     </span>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className="w-full h-[1px] bg-[#E8E8E8] absolute left-0 sm:top-[50px] top-[36px] -z-10"></div>
@@ -170,20 +183,14 @@ export default function SingleProductPage() {
                       Introduction
                     </h6>
                     <p className="text-[15px] text-qgray text-normal mb-10">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industrys
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries but also the on leap into electronic
-                      typesetting, remaining essentially unchanged. It wasn’t
-                      popularised in the 1960s with the release of Letraset
-                      sheets containing Lorem Ipsum passages, andei more
-                      recently with desktop publishing software like Aldus
-                      PageMaker including versions of Lorem Ipsum to make a type
-                      specimen book.
+                      {singleProduct?.description
+                        ? singleProduct.description
+                        : "no description"}
                     </p>
-                    <div>
+
+                    {/* product features */}
+
+                    {/* <div>
                       <h6 className="text-[18px] text-medium mb-4">
                         Features :
                       </h6>
@@ -203,7 +210,7 @@ export default function SingleProductPage() {
                           keyboard, touchpad with gesture support
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                 )}
                 {tab === "review" && (
@@ -216,7 +223,7 @@ export default function SingleProductPage() {
                       <Reviews
                         reviewLoading={reviewLoading}
                         reviewAction={reviewAction}
-                        comments={commnets.slice(0, 2)}
+                        comments={commnets}
                         name={name}
                         nameHandler={(e) => setName(e.target.value)}
                         email={email}

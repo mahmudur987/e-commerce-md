@@ -1,8 +1,9 @@
 import Image from "next/image";
-import Star from "../Helpers/icons/Star";
+import { useState } from "react";
 import InputCom from "../Helpers/InputCom";
 import LoaderStyleOne from "../Helpers/Loaders/LoaderStyleOne";
 import StarRating from "../Helpers/StarRating";
+import Star from "../Helpers/icons/Star";
 export default function Reviews({
   comments,
   rating,
@@ -20,6 +21,8 @@ export default function Reviews({
   hoverHandler,
   reviewLoading,
 }) {
+  const [count, setCount] = useState(2);
+
   return (
     <div className="review-wrapper w-full">
       <div className="w-full reviews mb-[60px]">
@@ -27,7 +30,7 @@ export default function Reviews({
         <div className="w-full comments mb-[60px]">
           {comments &&
             comments.length > 0 &&
-            comments.map((comment) => (
+            comments.slice(0, count).map((comment) => (
               <div
                 key={comment.id}
                 className="comment-item bg-white px-10 py-[32px] mb-2.5"
@@ -37,7 +40,9 @@ export default function Reviews({
                     <div className="w-[50px] h-[50px] rounded-full overflow-hidden relative">
                       <Image
                         layout="fill"
-                        src={`/assets/images/comment-user-1.png`}
+                        src={
+                          comment.image ?? `/assets/images/comment-user-1.png`
+                        }
                         alt=""
                         className="w-full h-full object-cover"
                       />
@@ -107,14 +112,22 @@ export default function Reviews({
             ))}
         </div>
         {/* load comments */}
-        <div className="w-full flex justify-center">
-          <button
-            type="button"
-            className="black-btn w-[300px] h-[50px] text-sm font-semibold"
-          >
-            Load More
-          </button>
-        </div>
+        {comments.length === 0 ? (
+          <p>No comments</p>
+        ) : (
+          <div className="w-full flex justify-center">
+            <button
+              type="button"
+              onClick={() => setCount((pre) => pre + 1)}
+              disabled={count === comments.length}
+              className={`${
+                count === comments.length ? "bg-slate-400" : "black-btn "
+              }w-[300px] h-[50px] text-sm font-semibold`}
+            >
+              {count !== comments.length ? "Load More" : ""}
+            </button>
+          </div>
+        )}
       </div>
       <div className="write-review w-full">
         <h1 className="text-2xl font-medium text-qblack mb-5">

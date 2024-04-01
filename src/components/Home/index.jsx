@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import img1 from "../../../public/assets/images/bg (1).jpg";
 import { useGetAllCategories } from "../../utils/Site";
 import {
   useGetAllProduct,
@@ -18,7 +19,6 @@ import Banner from "./Banner";
 import BestSellers from "./BestSellers";
 import BrandSection from "./BrandSection";
 import ProductsAds from "./ProductsAds";
-
 export default function Home() {
   const {
     data: TopSelling,
@@ -147,7 +147,7 @@ export default function Home() {
         />
 
         <ProductsAds
-          ads={[`/../../../public/assets/images/bg (1).jpg`]}
+          ads={[img1]}
           className="products-ads-section mb-[60px]"
           sectionHeight="sm:h-[295px] h-full"
         />
