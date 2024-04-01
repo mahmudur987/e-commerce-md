@@ -19,8 +19,6 @@ export default function ProductView({
   reportHandler,
   singleProduct,
 }) {
-  console.log(singleProduct);
-
   const {
     category_name,
     name: productName,
@@ -31,41 +29,41 @@ export default function ProductView({
     image,
   } = singleProduct || {};
   const averageRating = calculateAverageRating(product_reviews);
-  const productsImg = [
-    {
-      id: 1,
-      src: "product-details-1.png",
-      color: "#FFBC63",
-      image,
-    },
-    {
-      id: 2,
-      src: "product-details-2.png",
-      color: "#649EFF",
-      image,
-    },
-    {
-      id: 3,
-      src: "product-details-3.png",
-      image,
-      color: "#FFFFFF",
-    },
-    {
-      id: 4,
-      image,
+  // const productsImg = [
+  //   {
+  //     id: 1,
+  //     src: "product-details-1.png",
+  //     color: "#FFBC63",
+  //     image,
+  //   },
+  //   {
+  //     id: 2,
+  //     src: "product-details-2.png",
+  //     color: "#649EFF",
+  //     image,
+  //   },
+  //   {
+  //     id: 3,
+  //     src: "product-details-3.png",
+  //     image,
+  //     color: "#FFFFFF",
+  //   },
+  //   {
+  //     id: 4,
+  //     image,
 
-      src: "product-details-4.png",
-      color: "#FF7173",
-    },
-    {
-      id: 6,
-      src: "product-details-5.png",
-      color: "",
-      image,
-    },
-  ];
-
-  const [src, setSrc] = useState(productsImg[0].src);
+  //     src: "product-details-4.png",
+  //     color: "#FF7173",
+  //   },
+  //   {
+  //     id: 6,
+  //     src: "product-details-5.png",
+  //     color: "",
+  //     image,
+  //   },
+  // ];
+  console.log(product_slider);
+  const [src, setSrc] = useState(null);
   const changeImgHandler = (current) => {
     setSrc(current);
   };
@@ -89,7 +87,13 @@ export default function ProductView({
         <div className="w-full">
           <div className="w-full h-[600px] border border-qgray-border flex justify-center items-center overflow-hidden relative mb-3">
             <img
-              src={image ?? `/assets/images/${src}`}
+              src={
+                src
+                  ? src
+                  : image
+                  ? image
+                  : `/assets/images/product-details-1.png`
+              }
               alt=""
               className="object-contain"
             />
@@ -98,16 +102,29 @@ export default function ProductView({
             </div>
           </div>
           <div className="flex gap-2 flex-wrap">
-            {productsImg &&
-              productsImg.length > 0 &&
-              productsImg.map((img) => (
+            <div
+              onClick={() => changeImgHandler(image)}
+              className="w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer"
+            >
+              <img
+                src={image ?? `/assets/images/product-details-1.png`}
+                alt=""
+                className={`w-full h-full object-contain ${
+                  src !== image ? "opacity-50" : ""
+                } `}
+              />
+            </div>
+
+            {product_slider &&
+              product_slider.length > 0 &&
+              product_slider.map((img) => (
                 <div
-                  onClick={() => changeImgHandler(img.src)}
+                  onClick={() => changeImgHandler(img.image)}
                   key={img.id}
                   className="w-[110px] h-[110px] p-[15px] border border-qgray-border cursor-pointer"
                 >
                   <img
-                    src={img.image ?? `/assets/images/${img.src}`}
+                    src={img.image ?? `/assets/images/product-details-1.png`}
                     alt=""
                     className={`w-full h-full object-contain ${
                       src !== img.src ? "opacity-50" : ""
