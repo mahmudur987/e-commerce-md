@@ -37,12 +37,11 @@ export default function AllProductPage() {
     sizeXXL: false,
     sizeFit: false,
   });
-
+  const [categoryName, setCategoryName] = useState("");
   const checkboxHandler = (e) => {
-    const { name } = e.target;
-    setFilter((prevState) => ({
-      [name]: !prevState[name],
-    }));
+    const { name, value } = e.target;
+    console.log(name);
+    console.log(value);
   };
   const [volume, setVolume] = useState([30, 60]);
   const [storage, setStorage] = useState(null);
@@ -70,6 +69,8 @@ export default function AllProductPage() {
             <div className="w-full lg:flex lg:space-x-[30px]">
               <div className="lg:w-[270px]">
                 <ProductsFilter
+                  categoryName={categoryName}
+                  setCategoryName={setCategoryName}
                   filterToggle={filterToggle}
                   filterToggleHandler={() => setToggle(!filterToggle)}
                   filters={filters}
