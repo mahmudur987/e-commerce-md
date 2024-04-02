@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllProduct } from "../../utils/products";
 import BreadcrumbCom from "../BreadcrumbCom";
 import ErrorComponent from "../Error/ErrorComponent";
@@ -9,39 +9,34 @@ import Layout from "../Partials/Layout";
 import ProductsFilter from "./ProductsFilter";
 
 export default function AllProductPage() {
-  const { data: products, isLoading, isError, error } = useGetAllProduct();
-  const [filters, setFilter] = useState({
-    mobileLaptop: false,
-    gaming: false,
-    imageVideo: false,
-    vehicles: false,
-    furnitures: false,
-    sport: false,
-    foodDrinks: false,
-    fashion: false,
-    toilet: false,
-    makeupCorner: false,
-    babyItem: false,
-    apple: false,
-    samsung: false,
-    walton: false,
-    oneplus: false,
-    vivo: false,
-    oppo: false,
-    xiomi: false,
-    others: false,
-    sizeS: false,
-    sizeM: false,
-    sizeL: false,
-    sizeXL: false,
-    sizeXXL: false,
-    sizeFit: false,
-  });
+  const [filter, setFilter] = useState(null);
 
+  const {
+    data: products,
+    isLoading,
+    isError,
+    error,
+  } = useGetAllProduct(filter);
+  const [volume, setVolume] = useState([30, 60]);
+  const [filterToggle, setToggle] = useState(false);
   const [selectedBrands, setSelectedBrands] = useState([]);
-
   const [categoryName, setCategoryName] = useState("");
-  const checkboxHandler = (e) => {
+  const [selectedFeatures, setSelectedFeatures] = useState({});
+  let queryString = Object.entries(selectedFeatures)
+    .map(([featureType, values]) => `${featureType}=${values.join(",")}`)
+    .join("&");
+
+  const fullFilterString = `${categoryName ? `category=${categoryName}` : ""}${
+    selectedBrands.length > 0 ? `&brand=${selectedBrands.join(",")}` : ""
+  }${queryString ? `&${queryString}` : ""}`;
+
+  useEffect(() => {
+    if (fullFilterString) {
+      setFilter(fullFilterString);
+    }
+  }, [fullFilterString]);
+
+  const brandHandler = (e) => {
     const { name, value } = e.target;
     const newArr = [...selectedBrands];
     const already = newArr.find((x) => x === name);
@@ -51,24 +46,28 @@ export default function AllProductPage() {
     }
     setSelectedBrands((pre) => [...pre, name]);
   };
-  console.log(selectedBrands);
-  const [volume, setVolume] = useState([30, 60]);
-  const [storage, setStorage] = useState(null);
-  const filterStorage = (value) => {
-    setStorage(value);
-  };
-  const [filterToggle, setToggle] = useState(false);
+  const featuresHandler = (featureType, value) => {
+    setSelectedFeatures((prevState) => {
+      const isSelected = prevState[featureType]?.includes(value);
+      let updatedSelections = { ...prevState };
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-  if (isError) {
-    return (
-      <ErrorComponent
-        message={error ? error.message : "can not load the data"}
-      />
-    );
-  }
+      if (isSelected) {
+        updatedSelections[featureType] = prevState[featureType].filter(
+          (item) => item !== value
+        );
+      } else {
+        updatedSelections[featureType] = [
+          ...(prevState[featureType] || []),
+          value,
+        ];
+      }
+
+      return updatedSelections;
+    });
+  };
+
+  console.log(filter);
+
   return (
     <>
       <Layout>
@@ -82,14 +81,13 @@ export default function AllProductPage() {
                   setCategoryName={setCategoryName}
                   selectedBrands={selectedBrands}
                   setSelectedBrands={setSelectedBrands}
+                  featuresHandler={featuresHandler}
+                  selectedFeatures={selectedFeatures}
                   filterToggle={filterToggle}
                   filterToggleHandler={() => setToggle(!filterToggle)}
-                  filters={filters}
-                  checkboxHandler={checkboxHandler}
+                  brandHandler={brandHandler}
                   volume={volume}
                   volumeHandler={(value) => setVolume(value)}
-                  storage={storage}
-                  filterstorage={filterStorage}
                   className="mb-[30px]"
                 />
                 {/* ads */}
@@ -107,7 +105,7 @@ export default function AllProductPage() {
                   <div>
                     <p className="font-400 text-[13px]">
                       <span className="text-qgray"> Showing</span> 1–{" "}
-                      {products.length} {"  "}
+                      {products?.length} {"  "}
                       results
                     </p>
                   </div>
@@ -151,8 +149,12 @@ export default function AllProductPage() {
                     </svg>
                   </button>
                 </div>
+                {isLoading && <LoadingSpinner />}
+                {isError && (
+                  <ErrorComponent message={error ? error.message : "Error"} />
+                )}
                 <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  xl:gap-[30px] gap-5 mb-[40px]">
-                  {products && products.length > 0 ? (
+                  {products && products.length > 0 && (
                     <DataIteration
                       datas={products}
                       startLength={0}
@@ -164,7 +166,9 @@ export default function AllProductPage() {
                         </div>
                       )}
                     </DataIteration>
-                  ) : (
+                  )}
+
+                  {!isError && !isLoading && products.length === 0 && (
                     <ErrorComponent message={"No data to show"} />
                   )}
                 </div>

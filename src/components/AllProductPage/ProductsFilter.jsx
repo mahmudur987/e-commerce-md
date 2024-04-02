@@ -2,12 +2,12 @@
 // import "react-input-range/lib/css/index.css";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
-import { useGetAllCategories } from "../../utils/Site";
+import { useGetAllCategories, useGetCategoryFeatures } from "../../utils/Site";
 import { useGetAllBrands } from "../../utils/products";
 import Checkbox from "../Helpers/Checkbox";
 export default function ProductsFilter({
   filters,
-  checkboxHandler,
+  brandHandler,
   volume,
   volumeHandler,
   storage,
@@ -19,6 +19,8 @@ export default function ProductsFilter({
   setCategoryName,
   selectedBrands,
   setSelectedBrands,
+  featuresHandler,
+  selectedFeatures,
 }) {
   const {
     data: categories,
@@ -32,7 +34,10 @@ export default function ProductsFilter({
     isError: brandsIsError,
     error: brandsError,
   } = useGetAllBrands();
-  // console.log(brands);
+
+  const { data: features, isLoading: featuresIsLoading } =
+    useGetCategoryFeatures(categoryName);
+
   return (
     <>
       <div
@@ -52,9 +57,9 @@ export default function ProductsFilter({
               {categories &&
                 !categoryIsLoading &&
                 !categoryIsError &&
-                categories.map((item) => (
+                categories.map((item, i) => (
                   <li
-                    key={item.id}
+                    key={i}
                     className="item flex justify-between items-center mb-5"
                   >
                     <div className="flex space-x-[14px] items-center">
@@ -111,18 +116,18 @@ export default function ProductsFilter({
               {brands &&
                 !brandsIsLoading &&
                 !brandsIsError &&
-                brands.map((item) => {
+                brands.map((item, i) => {
                   return (
                     <li
                       className="item flex justify-between items-center mb-5"
-                      key={item.id}
+                      key={i}
                     >
                       <div className="flex space-x-[14px] items-center">
                         <div>
                           <Checkbox
                             id={item.name}
                             name={item.name}
-                            handleChange={(e) => checkboxHandler(e)}
+                            handleChange={(e) => brandHandler(e)}
                             checked={selectedBrands[item.name.toLowerCase()]}
                           />
                         </div>
@@ -142,177 +147,52 @@ export default function ProductsFilter({
           </div>
         </div>
 
-        {/* storage */}
-        <div className="filter-subject-item pb-10 border-b border-qgray-border mt-10">
-          <div className="subject-title mb-[30px]">
-            <h1 className="text-black text-base font-500">Storage</h1>
-          </div>
-          <div className="filter-items">
-            <div className="flex space-x-[5px] flex-wrap">
-              <span
-                onClick={() => filterstorage("64GB")}
-                className={` font-400 border border-qgray-border text-xs px-[14px] py-[6px] cursor-pointer mb-[5px] ${
-                  storage === "64GB"
-                    ? "bg-qyellow text-qblack border-none"
-                    : " text-qgray "
-                }`}
-              >
-                64GB
-              </span>
-              <span
-                onClick={() => filterstorage("128GB")}
-                className={` font-400 border border-qgray-border text-xs px-[14px] py-[6px] cursor-pointer mb-[5px] ${
-                  storage === "128GB"
-                    ? "bg-qyellow text-qblack border-none"
-                    : " text-qgray "
-                }`}
-              >
-                128GB
-              </span>
-              <span
-                onClick={() => filterstorage("256GB")}
-                className={` font-400 border border-qgray-border text-xs px-[14px] py-[6px] cursor-pointer mb-[5px] ${
-                  storage === "256GB"
-                    ? "bg-qyellow text-qblack border-none"
-                    : " text-qgray "
-                }`}
-              >
-                256GB
-              </span>
-              <span
-                onClick={() => filterstorage("512GB")}
-                className={` font-400 border border-qgray-border text-xs px-[14px] py-[6px] cursor-pointer mb-[5px] ${
-                  storage === "512GB"
-                    ? "bg-qyellow text-qblack border-none"
-                    : " text-qgray "
-                }`}
-              >
-                512GB
-              </span>
-              <span
-                onClick={() => filterstorage("1024GB")}
-                className={` font-400 border border-qgray-border text-xs px-[14px] py-[6px] cursor-pointer mb-[5px] ${
-                  storage === "1024GB"
-                    ? "bg-qyellow text-qblack border-none"
-                    : " text-qgray "
-                }`}
-              >
-                1024GB
-              </span>
+        {features &&
+          features.length > 0 &&
+          !featuresIsLoading &&
+          features.map((item, i) => (
+            <div key={i} className="filter-subject-item pb-10 mt-10">
+              <div className="subject-title mb-[30px]">
+                <h1 className="text-black text-base font-500">
+                  {Object.keys(item)}
+                </h1>
+              </div>
+              <div className="filter-items">
+                <ul>
+                  {Object.values(item)[0]?.map((x, i) => (
+                    <li
+                      key={i}
+                      className="item flex justify-between items-center mb-5"
+                    >
+                      <div className="flex space-x-[14px] items-center">
+                        <div>
+                          <Checkbox
+                            id={x}
+                            name={x}
+                            checked={selectedFeatures[
+                              Object.keys(item)[0]
+                            ]?.includes(x)}
+                            handleChange={(e) =>
+                              featuresHandler(Object.keys(item)[0], x)
+                            }
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="sizeS"
+                            className="text-xs font-black font-400 capitalize"
+                          >
+                            {x}
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        </div>
-        {/* size */}
+          ))}
 
-        <div className="filter-subject-item pb-10 mt-10">
-          <div className="subject-title mb-[30px]">
-            <h1 className="text-black text-base font-500">Sizes</h1>
-          </div>
-          <div className="filter-items">
-            <ul>
-              <li className="item flex justify-between items-center mb-5">
-                <div className="flex space-x-[14px] items-center">
-                  <div>
-                    <Checkbox
-                      id="sizeS"
-                      name="sizeS"
-                      handleChange={(e) => checkboxHandler(e)}
-                      checked={filters.sizeS}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="sizeS"
-                      className="text-xs font-black font-400 capitalize"
-                    >
-                      s
-                    </label>
-                  </div>
-                </div>
-              </li>
-              <li className="item flex justify-between items-center mb-5">
-                <div className="flex space-x-[14px] items-center">
-                  <div>
-                    <Checkbox
-                      id="sizeM"
-                      name="sizeM"
-                      handleChange={(e) => checkboxHandler(e)}
-                      checked={filters.sizeM}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="sizeM"
-                      className="text-xs font-black font-400 capitalize"
-                    >
-                      M
-                    </label>
-                  </div>
-                </div>
-              </li>
-              <li className="item flex justify-between items-center mb-5">
-                <div className="flex space-x-[14px] items-center">
-                  <div>
-                    <Checkbox
-                      id="sizeXL"
-                      name="sizeXL"
-                      handleChange={(e) => checkboxHandler(e)}
-                      checked={filters.sizeXL}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="sizeXL"
-                      className="text-xs font-black font-400 capitalize"
-                    >
-                      XL
-                    </label>
-                  </div>
-                </div>
-              </li>
-              <li className="item flex justify-between items-center mb-5">
-                <div className="flex space-x-[14px] items-center">
-                  <div>
-                    <Checkbox
-                      id="sizeXXL"
-                      name="sizeXXL"
-                      handleChange={(e) => checkboxHandler(e)}
-                      checked={filters.sizeXXL}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="sizeXXL"
-                      className="text-xs font-black font-400 capitalize"
-                    >
-                      XXL
-                    </label>
-                  </div>
-                </div>
-              </li>
-              <li className="item flex justify-between items-center mb-5">
-                <div className="flex space-x-[14px] items-center">
-                  <div>
-                    <Checkbox
-                      id="sizeFit"
-                      name="sizeFit"
-                      handleChange={(e) => checkboxHandler(e)}
-                      checked={filters.sizeFit}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="sizeFit"
-                      className="text-xs font-black font-400 capitalize"
-                    >
-                      Sliem Fit
-                    </label>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
         <button
           onClick={filterToggleHandler}
           type="button"

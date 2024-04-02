@@ -2,6 +2,9 @@ import { useQuery } from "react-query"
 import AXIOS from "./axios"
 
 export const useGetAllProduct = (filter) => {
+
+    console.log(filter)
+
     return useQuery({
         queryKey: [filter],
         queryFn: async () => {

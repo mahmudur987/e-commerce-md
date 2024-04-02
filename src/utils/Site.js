@@ -42,3 +42,12 @@ export const useGetCategoryProduct = (filter) => {
         }
     })
 }
+export const useGetCategoryFeatures = (filter) => {
+    return useQuery({
+        queryKey: [filter],
+        queryFn: async () => {
+            const { data } = await AXIOS.get(`api/feature-filter-list/?category=${filter}`)
+            return data
+        }
+    })
+}

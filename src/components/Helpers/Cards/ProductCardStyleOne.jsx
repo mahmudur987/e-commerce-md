@@ -25,7 +25,7 @@ export default function ProductCardStyleOne({ datas, type }) {
 
   return (
     <div
-      key={Math.floor(Math.random() * 500)}
+      key={Math.floor(Math.random())}
       className="product-card-one w-full h-full bg-white relative group overflow-hidden"
       style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
     >
@@ -103,8 +103,8 @@ export default function ProductCardStyleOne({ datas, type }) {
 
         {datas?.product_reviews?.length > 0 && (
           <div className="reviews flex space-x-[1px] mb-3">
-            {Array.from(Array(Math.floor(averageRating)), () => (
-              <span key={datas.review + Math.random()}>
+            {Array.from(Array(Math.floor(averageRating)), (_, index) => (
+              <span key={`star-${index}-${datas.id}`}>
                 <Star />
               </span>
             ))}
