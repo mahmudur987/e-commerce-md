@@ -17,6 +17,8 @@ export default function ProductsFilter({
   filterToggleHandler,
   categoryName,
   setCategoryName,
+  selectedBrands,
+  setSelectedBrands,
 }) {
   const {
     data: categories,
@@ -30,7 +32,7 @@ export default function ProductsFilter({
     isError: brandsIsError,
     error: brandsError,
   } = useGetAllBrands();
-
+  // console.log(brands);
   return (
     <>
       <div
@@ -51,7 +53,10 @@ export default function ProductsFilter({
                 !categoryIsLoading &&
                 !categoryIsError &&
                 categories.map((item) => (
-                  <li className="item flex justify-between items-center mb-5">
+                  <li
+                    key={item.id}
+                    className="item flex justify-between items-center mb-5"
+                  >
                     <div className="flex space-x-[14px] items-center">
                       <div>
                         <Checkbox
@@ -105,36 +110,39 @@ export default function ProductsFilter({
             <ul>
               {brands &&
                 !brandsIsLoading &&
-                !brandsIsError &
-                  brands.map((item) => {
-                    console.log(item);
-
-                    return (
-                      <li className="item flex justify-between items-center mb-5">
-                        <div className="flex space-x-[14px] items-center">
-                          <div>
-                            <Checkbox
-                              id={item.name}
-                              name={item.name}
-                              handleChange={(e) => checkboxHandler(e)}
-                              checked={filters.apple}
-                            />
-                          </div>
-                          <div>
-                            <label
-                              htmlFor="apple"
-                              className="text-xs font-black font-400 capitalize"
-                            >
-                              {item?.name}255566
-                            </label>
-                          </div>
+                !brandsIsError &&
+                brands.map((item) => {
+                  return (
+                    <li
+                      className="item flex justify-between items-center mb-5"
+                      key={item.id}
+                    >
+                      <div className="flex space-x-[14px] items-center">
+                        <div>
+                          <Checkbox
+                            id={item.name}
+                            name={item.name}
+                            handleChange={(e) => checkboxHandler(e)}
+                            checked={selectedBrands[item.name.toLowerCase()]}
+                          />
                         </div>
-                      </li>
-                    );
-                  })}
+                        <div>
+                          <label
+                            htmlFor={item.name.toLowerCase()} // Use lowercase name as ID
+                            className="text-xs font-black font-400 capitalize"
+                          >
+                            {item.name} ({item.total_products})
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </div>
+
+        {/* storage */}
         <div className="filter-subject-item pb-10 border-b border-qgray-border mt-10">
           <div className="subject-title mb-[30px]">
             <h1 className="text-black text-base font-500">Storage</h1>
@@ -194,6 +202,8 @@ export default function ProductsFilter({
             </div>
           </div>
         </div>
+        {/* size */}
+
         <div className="filter-subject-item pb-10 mt-10">
           <div className="subject-title mb-[30px]">
             <h1 className="text-black text-base font-500">Sizes</h1>

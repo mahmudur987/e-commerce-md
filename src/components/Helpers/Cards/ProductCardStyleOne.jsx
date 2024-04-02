@@ -25,6 +25,7 @@ export default function ProductCardStyleOne({ datas, type }) {
 
   return (
     <div
+      key={Math.floor(Math.random() * 500)}
       className="product-card-one w-full h-full bg-white relative group overflow-hidden"
       style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
     >

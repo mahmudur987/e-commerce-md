@@ -6,7 +6,7 @@ function DataIteration(props) {
         datas.length >= endLength &&
         datas
           .slice(startLength, endLength)
-          .map((value) => children({ datas: value }))}
+          .map((value, i) => children({ datas: value, i }))}
     </>
   );
 }

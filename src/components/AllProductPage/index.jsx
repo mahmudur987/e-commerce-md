@@ -37,12 +37,21 @@ export default function AllProductPage() {
     sizeXXL: false,
     sizeFit: false,
   });
+
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
   const [categoryName, setCategoryName] = useState("");
   const checkboxHandler = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
+    const newArr = [...selectedBrands];
+    const already = newArr.find((x) => x === name);
+    if (already) {
+      const RemoveFrom = newArr.filter((x) => x !== name);
+      return setSelectedBrands(RemoveFrom);
+    }
+    setSelectedBrands((pre) => [...pre, name]);
   };
+  console.log(selectedBrands);
   const [volume, setVolume] = useState([30, 60]);
   const [storage, setStorage] = useState(null);
   const filterStorage = (value) => {
@@ -71,6 +80,8 @@ export default function AllProductPage() {
                 <ProductsFilter
                   categoryName={categoryName}
                   setCategoryName={setCategoryName}
+                  selectedBrands={selectedBrands}
+                  setSelectedBrands={setSelectedBrands}
                   filterToggle={filterToggle}
                   filterToggleHandler={() => setToggle(!filterToggle)}
                   filters={filters}
@@ -147,8 +158,8 @@ export default function AllProductPage() {
                       startLength={0}
                       endLength={products?.length}
                     >
-                      {({ datas }) => (
-                        <div data-aos="fade-up" key={datas.id}>
+                      {({ datas, i }) => (
+                        <div data-aos="fade-up" key={i + Math.random()}>
                           <ProductCardStyleOne datas={datas} />
                         </div>
                       )}
