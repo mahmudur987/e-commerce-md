@@ -10,6 +10,7 @@ import {
   QueryClientProvider,
 } from 'react-query';
 import CartProvider from "../src/context/CartContext";
+import { WishlistProvider } from "../src/context/WishListContext";
 import "../styles/globals.css";
 import "../styles/loader.css";
 import "../styles/selectbox.css";
@@ -45,8 +46,11 @@ function MyApp({ Component, pageProps }) {
             <link rel="icon" href="/favicon.png" />
           </Head>
           <CartProvider>
-            <Component {...pageProps} />
-            <Toaster />
+            <WishlistProvider>
+              <Component {...pageProps} />
+              <Toaster />
+            </WishlistProvider>
+
 
           </CartProvider>
 

@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+import { WishlistContext } from "../../context/WishListContext";
 
-export default function InputQuantityCom() {
-  const [quantity, setQuantity] = useState(1);
+export default function InputQuantityCom({ data, wishList }) {
+  const { increaseQuantity, decreaseQuantity } = useContext(CartContext);
+  const { increaseWishListQuantity, decreaseWishListQuantity } =
+    useContext(WishlistContext);
   const increment = () => {
-    setQuantity((prev) => prev + 1);
+    if (wishList) {
+      return increaseWishListQuantity(data.id);
+    }
+
+    increaseQuantity(data.id);
   };
   const decrement = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
+    if (wishList) {
+      if (data.quantity > 1) {
+        decreaseWishListQuantity(data.id);
+      }
+    }
+    if (data.quantity > 1) {
+      decreaseQuantity(data.id);
     }
   };
   return (
@@ -20,7 +33,7 @@ export default function InputQuantityCom() {
         >
           -
         </button>
-        <span className="text-qblack">{quantity}</span>
+        <span className="text-qblack">{data ? data?.quantity : 0}</span>
         <button
           onClick={increment}
           type="button"

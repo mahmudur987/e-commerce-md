@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import InputQuantityCom from "../Helpers/InputQuantityCom";
 export default function ProductsTable({ className }) {
-  const { cart } = useContext(CartContext);
+  const { cart, removeFromCart } = useContext(CartContext);
 
   return (
     <div className={`w-full ${className || ""}`}>
@@ -66,7 +66,7 @@ export default function ProductsTable({ className }) {
                   </td>
                   <td className=" py-4">
                     <div className="flex justify-center items-center">
-                      <InputQuantityCom />
+                      <InputQuantityCom data={item} />
                     </div>
                   </td>
                   <td className="text-right py-4">
@@ -77,7 +77,10 @@ export default function ProductsTable({ className }) {
                     </div>
                   </td>
                   <td className="text-right py-4">
-                    <div className="flex space-x-1 items-center justify-center">
+                    <div
+                      onClick={() => removeFromCart(item.id)}
+                      className="flex space-x-1 items-center justify-center"
+                    >
                       <span>
                         <svg
                           width="10"

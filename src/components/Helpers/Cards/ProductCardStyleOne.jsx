@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import { WishlistContext } from "../../../context/WishListContext";
 import Compair from "../icons/Compair";
 import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
@@ -24,7 +25,7 @@ export default function ProductCardStyleOne({ datas, type }) {
   const averageRating = calculateAverageRating(datas?.product_reviews);
   const available = Number(datas?.available);
   const { addToCart } = useContext(CartContext);
-
+  const { addToWishlist } = useContext(WishlistContext);
   return (
     <div
       key={Math.floor(Math.random())}
@@ -135,11 +136,11 @@ export default function ProductCardStyleOne({ datas, type }) {
             <QuickViewIco />
           </span>
         </Link>
-        <Link href="#">
+        <button onClick={() => addToWishlist(datas)}>
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <ThinLove />
           </span>
-        </Link>
+        </button>
         <Link href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <Compair />

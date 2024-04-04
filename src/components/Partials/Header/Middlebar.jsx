@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import { WishlistContext } from "../../../context/WishListContext";
 import Cart from "../../Cart";
 import SearchBox from "../../Helpers/SearchBox";
 import Compair from "../../Helpers/icons/Compair";
@@ -10,6 +11,7 @@ import ThinPeople from "../../Helpers/icons/ThinPeople";
 
 export default function Middlebar({ className, type }) {
   const { cart } = useContext(CartContext);
+  const { wishlist } = useContext(WishlistContext);
 
   return (
     <div className={`w-full h-[86px] bg-white ${className}`}>
@@ -79,7 +81,7 @@ export default function Middlebar({ className, type }) {
                     type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
                   }`}
                 >
-                  1
+                  {wishlist ? wishlist.length : ""}
                 </span>
               </div>
               <div className="cart-wrapper group relative py-4">
