@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { CartContext } from "../../../context/CartContext";
 import Compair from "../icons/Compair";
 import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
@@ -20,8 +22,8 @@ export function calculateAverageRating(reviews) {
 
 export default function ProductCardStyleOne({ datas, type }) {
   const averageRating = calculateAverageRating(datas?.product_reviews);
-
   const available = Number(datas?.available);
+  const { addToCart } = useContext(CartContext);
 
   return (
     <div
@@ -30,7 +32,7 @@ export default function ProductCardStyleOne({ datas, type }) {
       style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
     >
       <div
-        className="product-card-img w-full h-[300px]"
+        className="product-card-img w-full h-[340px]"
         style={{
           background: `url(${datas?.image}) no-repeat center `,
           backgroundSize: "cover",
@@ -76,10 +78,11 @@ export default function ProductCardStyleOne({ datas, type }) {
       </div>
       <div className="product-card-details px-[30px] pb-[30px] relative">
         {/* add to card button */}
-        <div className="absolute w-full h-10 px-[30px] left-0 top-40 group-hover:top-[85px] transition-all duration-300 ease-in-out">
-          <button
+        <div className="absolute w-full h-10 px-[30px] left-0 top-40  group-hover:top-[80px] transition-all duration-300 ease-in-out cursor-pointer">
+          <buttons
             type="button"
             className={type === 3 ? "blue-btn" : "yellow-btn"}
+            onClick={() => addToCart(datas)}
           >
             <div className="flex items-center space-x-3">
               <span>
@@ -96,7 +99,7 @@ export default function ProductCardStyleOne({ datas, type }) {
               </span>
               <span>Add To Cart</span>
             </div>
-          </button>
+          </buttons>
         </div>
 
         {/* rating title price  */}

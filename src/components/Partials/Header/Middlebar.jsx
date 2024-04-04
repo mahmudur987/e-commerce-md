@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { CartContext } from "../../../context/CartContext";
 import Cart from "../../Cart";
 import SearchBox from "../../Helpers/SearchBox";
 import Compair from "../../Helpers/icons/Compair";
@@ -7,6 +9,8 @@ import ThinLove from "../../Helpers/icons/ThinLove";
 import ThinPeople from "../../Helpers/icons/ThinPeople";
 
 export default function Middlebar({ className, type }) {
+  const { cart } = useContext(CartContext);
+
   return (
     <div className={`w-full h-[86px] bg-white ${className}`}>
       <div className="container-x mx-auto h-full">
@@ -41,7 +45,6 @@ export default function Middlebar({ className, type }) {
                   />
                 </Link>
               )}
-
             </div>
             <div className="w-[517px] h-[44px]">
               <SearchBox type={type} className="search-com" />
@@ -54,9 +57,12 @@ export default function Middlebar({ className, type }) {
                       <Compair />
                     </span>
                   </>
-
                 </Link>
-                <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow'}`}>
+                <span
+                  className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                    type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                  }`}
+                >
                   2
                 </span>
               </div>
@@ -68,7 +74,11 @@ export default function Middlebar({ className, type }) {
                     </span>
                   </>
                 </Link>
-                <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow'}`}>
+                <span
+                  className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                    type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                  }`}
+                >
                   1
                 </span>
               </div>
@@ -81,11 +91,18 @@ export default function Middlebar({ className, type }) {
                       </span>
                     </>
                   </Link>
-                  <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow'}`}>
-                    15
+                  <span
+                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                      type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                    }`}
+                  >
+                    {cart.length > 0 ? cart.length : ""}
                   </span>
                 </div>
-                <Cart type={type} className="absolute -right-[45px] top-11 z-50 hidden group-hover:block" />
+                <Cart
+                  type={type}
+                  className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
+                />
               </div>
               <div>
                 <Link href="/profile#dashboard" passHref>

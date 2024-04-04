@@ -128,7 +128,7 @@ export default function ProductsFilter({
                             id={item.name}
                             name={item.name}
                             handleChange={(e) => brandHandler(e)}
-                            checked={selectedBrands[item.name.toLowerCase()]}
+                            checked={selectedBrands === item.name}
                           />
                         </div>
                         <div>
@@ -136,7 +136,7 @@ export default function ProductsFilter({
                             htmlFor={item.name.toLowerCase()} // Use lowercase name as ID
                             className="text-xs font-black font-400 capitalize"
                           >
-                            {item.name} ({item.total_products})
+                            {item.name}
                           </label>
                         </div>
                       </div>

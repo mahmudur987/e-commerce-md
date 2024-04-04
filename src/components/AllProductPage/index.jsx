@@ -1,16 +1,18 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useGetAllProduct } from "../../utils/products";
 import BreadcrumbCom from "../BreadcrumbCom";
 import ErrorComponent from "../Error/ErrorComponent";
+import NoDataToShow from "../Error/NoData";
 import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
 import DataIteration from "../Helpers/DataIteration";
 import LoadingSpinner from "../Loader/LoadingSpinar";
 import Layout from "../Partials/Layout";
 import ProductsFilter from "./ProductsFilter";
-
 export default function AllProductPage() {
   const [filter, setFilter] = useState(null);
-
+  const router = useRouter();
+  const { category } = router.query;
   const {
     data: products,
     isLoading,
@@ -19,7 +21,7 @@ export default function AllProductPage() {
   } = useGetAllProduct(filter);
   const [volume, setVolume] = useState([30, 60]);
   const [filterToggle, setToggle] = useState(false);
-  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [selectedFeatures, setSelectedFeatures] = useState({});
   let queryString = Object.entries(selectedFeatures)
@@ -27,7 +29,7 @@ export default function AllProductPage() {
     .join("&");
 
   const fullFilterString = `${categoryName ? `category=${categoryName}` : ""}${
-    selectedBrands.length > 0 ? `&brand=${selectedBrands.join(",")}` : ""
+    selectedBrands.length > 0 ? `&brand=${selectedBrands}` : ""
   }${queryString ? `&${queryString}` : ""}`;
 
   useEffect(() => {
@@ -35,16 +37,15 @@ export default function AllProductPage() {
       setFilter(fullFilterString);
     }
   }, [fullFilterString]);
+  useEffect(() => {
+    if (category) {
+      setCategoryName(category);
+    }
+  }, [category]);
 
   const brandHandler = (e) => {
     const { name, value } = e.target;
-    const newArr = [...selectedBrands];
-    const already = newArr.find((x) => x === name);
-    if (already) {
-      const RemoveFrom = newArr.filter((x) => x !== name);
-      return setSelectedBrands(RemoveFrom);
-    }
-    setSelectedBrands((pre) => [...pre, name]);
+    setSelectedBrands(name);
   };
   const featuresHandler = (featureType, value) => {
     setSelectedFeatures((prevState) => {
@@ -65,8 +66,6 @@ export default function AllProductPage() {
       return updatedSelections;
     });
   };
-
-  console.log(filter);
 
   return (
     <>
@@ -169,7 +168,11 @@ export default function AllProductPage() {
                   )}
 
                   {!isError && !isLoading && products.length === 0 && (
-                    <ErrorComponent message={"No data to show"} />
+                    <div className="col-span-full">
+                      <NoDataToShow
+                        message={"There is no product to display"}
+                      />
+                    </div>
                   )}
                 </div>
 
