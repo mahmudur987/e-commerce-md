@@ -480,269 +480,44 @@ export default function ProductsCompaire() {
                     </span>
                   </td>
                 </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Memory
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      8GB RAM
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      8GB RAM
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      8GB RAM
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      8GB RAM
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Storage
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      1TB 5400rpm SATA HDD
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      1TB 5400rpm SATA HDD
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      1TB 5400rpm SATA HDD
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      1TB 5400rpm SATA HDD
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Graphics
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Intel UHD Graphics 600
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Intel UHD Graphics 600
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Intel UHD Graphics 600
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Intel UHD Graphics 600
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Operating System
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      macOS
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      macOS
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      macOS
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      macOS
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Battery
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Built-in 49.9‑watt‑hour
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Built-in 49.9‑watt‑hour
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Built-in 49.9‑watt‑hour
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Built-in 49.9‑watt‑hour
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Wi-Fi
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      802.11ac Wi-Fi wireless
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      802.11ac Wi-Fi wireless
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      802.11ac Wi-Fi wireless
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      802.11ac Wi-Fi wireless
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Bluetooth
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      5.0 wireless technology
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      5.0 wireless technology
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      5.0 wireless technology
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      5.0 wireless technology
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        WebCam
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      720p FaceTime HD camera
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      720p FaceTime HD camera
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      720p FaceTime HD camera
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      720p FaceTime HD camera
-                    </span>
-                  </td>
-                </tr>
-                <tr className="table-row-wrapper">
-                  <td className="w-[233px] px-[26px] align-top bg-[#FAFAFA]">
-                    <div className="">
-                      <h1 className="text-[15px] font-medium text-qblack ">
-                        Audio
-                      </h1>
-                    </div>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Stereo speakers
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Stereo speakers
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Stereo speakers
-                    </span>
-                  </td>
-                  <td className="product w-[235px] bg-white px-6 border-r border-qgray-border pb-[20px] align-top">
-                    <span className="text-[13px] font-normal text-qgraytwo">
-                      Stereo speakers
-                    </span>
-                  </td>
-                </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+        <div className="container-x mx-auto my-10 p-5">
+          <div className="w-full border border-qgray-border p-5">
+            <div className="grid grid-cols-4 gap-6 w-full">
+              {/* Product Comparison */}
+              <div className=" flex flex-col justify-between gap-5">
+                <div className=" h-full flex justify-center items-center">
+                  <h1 className="text-[15px] font-medium text-qblack ">
+                    Image
+                  </h1>
+                </div>
+                <div className="  flex justify-center items-center">
+                  <h1 className="text-[15px] font-medium text-qblack ">
+                    Rating
+                  </h1>
+                </div>
+              </div>
+
+              {/* Products 1 */}
+              <div className="flex flex-col justify-between gap-5">
+                <figure className="w-[161px] h-[161px]">
+                  <img
+                    src={`/assets/images/product-img-15.jpg`}
+                    alt=""
+                    className="w-full h-full object-contain"
+                  />
+                </figure>
+
+                <div className="">
+                  <span className="text-[13px] font-normal text-qgraytwo">
+                    Apple MacBook Air 13
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        // Load cart from local storage on component mount
+
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
             setCart(JSON.parse(savedCart));
@@ -16,7 +16,7 @@ const CartProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        // Save cart to local storage whenever it changes
+
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 

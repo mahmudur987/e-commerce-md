@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import { CompareContext } from "../../../context/CompareContext";
 import { WishlistContext } from "../../../context/WishListContext";
 import Cart from "../../Cart";
 import SearchBox from "../../Helpers/SearchBox";
@@ -12,6 +13,7 @@ import ThinPeople from "../../Helpers/icons/ThinPeople";
 export default function Middlebar({ className, type }) {
   const { cart } = useContext(CartContext);
   const { wishlist } = useContext(WishlistContext);
+  const { compareList } = useContext(CompareContext);
 
   return (
     <div className={`w-full h-[86px] bg-white ${className}`}>
@@ -60,13 +62,15 @@ export default function Middlebar({ className, type }) {
                     </span>
                   </>
                 </Link>
-                <span
-                  className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                    type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
-                  }`}
-                >
-                  2
-                </span>
+                {compareList.length > 0 && (
+                  <span
+                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                      type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                    }`}
+                  >
+                    {compareList.length}
+                  </span>
+                )}
               </div>
               <div className="favorite relative">
                 <Link href="/wishlist" passHref>
@@ -76,13 +80,15 @@ export default function Middlebar({ className, type }) {
                     </span>
                   </>
                 </Link>
-                <span
-                  className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                    type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
-                  }`}
-                >
-                  {wishlist ? wishlist.length : ""}
-                </span>
+                {wishlist.length > 0 && (
+                  <span
+                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                      type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                    }`}
+                  >
+                    {wishlist ? wishlist.length : ""}
+                  </span>
+                )}
               </div>
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer">
@@ -93,13 +99,15 @@ export default function Middlebar({ className, type }) {
                       </span>
                     </>
                   </Link>
-                  <span
-                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                      type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
-                    }`}
-                  >
-                    {cart.length > 0 ? cart.length : ""}
-                  </span>
+                  {cart.length > 0 && (
+                    <span
+                      className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                        type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                      }`}
+                    >
+                      {cart.length > 0 ? cart.length : ""}
+                    </span>
+                  )}
                 </div>
                 <Cart
                   type={type}

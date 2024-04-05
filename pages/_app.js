@@ -10,6 +10,7 @@ import {
   QueryClientProvider,
 } from 'react-query';
 import CartProvider from "../src/context/CartContext";
+import { CompareProvider } from "../src/context/CompareContext";
 import { WishlistProvider } from "../src/context/WishListContext";
 import "../styles/globals.css";
 import "../styles/loader.css";
@@ -47,8 +48,12 @@ function MyApp({ Component, pageProps }) {
           </Head>
           <CartProvider>
             <WishlistProvider>
-              <Component {...pageProps} />
-              <Toaster />
+              <CompareProvider>
+                <Component {...pageProps} />
+                <Toaster />
+              </CompareProvider>
+
+
             </WishlistProvider>
 
 

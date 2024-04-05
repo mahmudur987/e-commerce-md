@@ -1,5 +1,6 @@
 import React from "react";
-import ProductsCompaire from "../src/components/ProductsCompaire/index";
+import ProductsCompare from "../src/components/ProductsCompaire/ProductCompare";
+
 export default function productsCompairePage() {
-  return <ProductsCompaire />;
+  return <ProductsCompare />;
 }

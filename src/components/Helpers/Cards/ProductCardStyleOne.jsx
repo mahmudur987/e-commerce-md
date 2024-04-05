@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import { CompareContext } from "../../../context/CompareContext";
 import { WishlistContext } from "../../../context/WishListContext";
 import Compair from "../icons/Compair";
 import QuickViewIco from "../icons/QuickViewIco";
@@ -26,6 +27,8 @@ export default function ProductCardStyleOne({ datas, type }) {
   const available = Number(datas?.available);
   const { addToCart } = useContext(CartContext);
   const { addToWishlist } = useContext(WishlistContext);
+  const { addToCompare } = useContext(CompareContext);
+
   return (
     <div
       key={Math.floor(Math.random())}
@@ -141,11 +144,11 @@ export default function ProductCardStyleOne({ datas, type }) {
             <ThinLove />
           </span>
         </button>
-        <Link href="#">
+        <button onClick={() => addToCompare(datas)} href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <Compair />
           </span>
-        </Link>
+        </button>
       </div>
     </div>
   );
