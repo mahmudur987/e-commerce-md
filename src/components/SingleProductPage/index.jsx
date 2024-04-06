@@ -54,7 +54,7 @@ export default function SingleProductPage() {
         comments: x?.review_text,
         review: x?.rating,
         image:x?.image
-      },
+      }
    
     );
   });

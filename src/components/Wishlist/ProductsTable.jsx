@@ -26,7 +26,7 @@ export default function ProductsTable({ className }) {
 
             {wishlist &&
               wishlist.map((item) => (
-                <tr className="bg-white border-b hover:bg-gray-50">
+                <tr  key={item.id} className="bg-white border-b hover:bg-gray-50">
                   <td className="pl-10  py-4 ">
                     <div className="flex space-x-6 items-center">
                       <div className="w-[80px] h-[80px] overflow-hidden flex justify-center items-center border border-[#EDEDED] relative">

@@ -87,7 +87,7 @@ export default function Navbar({ className, type }) {
                       !categoryLoading &&
                       !categoryIsError &&
                       categories.map((category) => (
-                        <li className="category-item">
+                        <li className="category-item" key={category.id}>
                           <Link
                             href={`/all-products/?category=${category.name}`}
                           >
