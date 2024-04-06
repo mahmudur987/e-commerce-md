@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../context/CartContext";
@@ -20,7 +21,7 @@ export default function Middlebar({ className, type }) {
   useEffect(() => {
     setLogo(imageUrl + data?.com_logo);
   }, [data]);
-  console.log(logo);
+  console.log(data);
   return (
     <div className={`w-full h-[86px] bg-white ${className}`}>
       <div className="container-x mx-auto h-full">
@@ -29,7 +30,7 @@ export default function Middlebar({ className, type }) {
             <div className="cursor-pointer">
               {type === 3 ? (
                 <Link href="/">
-                  <img
+                  <Image
                     width="152"
                     height="36"
                     src={logo ? logo : `/assets/images/logo-3.svg`}
@@ -38,7 +39,7 @@ export default function Middlebar({ className, type }) {
                 </Link>
               ) : type === 4 ? (
                 <Link href="/">
-                  <img
+                  <Image
                     width="152"
                     height="36"
                     src={logo ? logo : `/assets/images/logo-4.svg`}
@@ -47,7 +48,7 @@ export default function Middlebar({ className, type }) {
                 </Link>
               ) : (
                 <Link href="/">
-                  <img
+                  <Image
                     width="152"
                     height="36"
                     src={logo ? logo : `/assets/images/logo.png`}
