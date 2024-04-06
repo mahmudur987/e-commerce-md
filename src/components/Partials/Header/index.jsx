@@ -2,13 +2,15 @@ import Link from "next/link";
 import ThinBag from "../../Helpers/icons/ThinBag";
 import Middlebar from "./Middlebar";
 import Navbar from "./Navbar";
-import TopBar from "./TopBar";
 
 export default function HeaderOne({ className, drawerAction, type = 1 }) {
   return (
     <header className={` ${className || ""} header-section-wrapper relative`}>
-      <TopBar className="quomodo-shop-top-bar" />
-      <Middlebar type={type} className="quomodo-shop-middle-bar lg:block hidden" />
+      {/* <TopBar className="quomodo-shop-top-bar" /> */}
+      <Middlebar
+        type={type}
+        className="quomodo-shop-middle-bar lg:block hidden"
+      />
       <div className="quomodo-shop-drawer lg:hidden block w-full h-[60px] bg-white">
         <div className="w-full h-full flex justify-between items-center px-5">
           <div onClick={drawerAction}>
@@ -65,7 +67,11 @@ export default function HeaderOne({ className, drawerAction, type = 1 }) {
                 </span>
               </>
             </Link>
-            <span className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? 'bg-qh3-blue text-white' : 'bg-qyellow text-qblack'}`}>
+            <span
+              className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow text-qblack"
+              }`}
+            >
               15
             </span>
           </div>

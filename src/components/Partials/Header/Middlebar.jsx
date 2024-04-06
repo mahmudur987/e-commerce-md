@@ -1,20 +1,26 @@
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../context/CartContext";
 import { CompareContext } from "../../../context/CompareContext";
 import { WishlistContext } from "../../../context/WishListContext";
+import { useSiteSetting } from "../../../utils/Site";
+import { imageUrl } from "../../../utils/axios";
 import Cart from "../../Cart";
 import SearchBox from "../../Helpers/SearchBox";
 import Compair from "../../Helpers/icons/Compair";
 import ThinBag from "../../Helpers/icons/ThinBag";
 import ThinLove from "../../Helpers/icons/ThinLove";
 import ThinPeople from "../../Helpers/icons/ThinPeople";
-
 export default function Middlebar({ className, type }) {
   const { cart } = useContext(CartContext);
   const { wishlist } = useContext(WishlistContext);
   const { compareList } = useContext(CompareContext);
-
+  const { data, isError, isLoading } = useSiteSetting();
+  const [logo, setLogo] = useState(null);
+  useEffect(() => {
+    setLogo(imageUrl + data?.com_logo);
+  }, [data]);
+  console.log(logo);
   return (
     <div className={`w-full h-[86px] bg-white ${className}`}>
       <div className="container-x mx-auto h-full">
@@ -26,7 +32,7 @@ export default function Middlebar({ className, type }) {
                   <img
                     width="152"
                     height="36"
-                    src={`/assets/images/logo-3.svg`}
+                    src={logo ? logo : `/assets/images/logo-3.svg`}
                     alt="logo"
                   />
                 </Link>
@@ -35,7 +41,7 @@ export default function Middlebar({ className, type }) {
                   <img
                     width="152"
                     height="36"
-                    src={`/assets/images/logo-4.svg`}
+                    src={logo ? logo : `/assets/images/logo-4.svg`}
                     alt="logo"
                   />
                 </Link>
@@ -44,7 +50,7 @@ export default function Middlebar({ className, type }) {
                   <img
                     width="152"
                     height="36"
-                    src={`/assets/images/logo.png`}
+                    src={logo ? logo : `/assets/images/logo.png`}
                     alt="logo"
                   />
                 </Link>
