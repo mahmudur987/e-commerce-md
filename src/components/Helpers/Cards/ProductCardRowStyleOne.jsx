@@ -5,9 +5,15 @@ import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
 import ThinLove from "../icons/ThinLove";
 import { calculateAverageRating } from "./ProductCardStyleOne";
+import { useContext } from "react";
+import { CartContext } from "../../../context/CartContext";
+import { WishlistContext } from "../../../context/WishListContext";
+import { CompareContext } from "../../../context/CompareContext";
 export default function ProductCardRowStyleTwo({ className, datas, type }) {
   const averageRating = calculateAverageRating(datas?.product_reviews);
-
+  const { addToCart } = useContext(CartContext);
+  const { addToWishlist } = useContext(WishlistContext);
+  const { addToCompare } = useContext(CompareContext);
   return (
     <div
       data-aos="fade-left"
@@ -48,7 +54,11 @@ export default function ProductCardRowStyleTwo({ className, datas, type }) {
                 {datas.offer_price ? datas.offer_price : datas.price}
               </span>
             </p>
-            <button type="button" className="w-[110px] h-[30px]">
+            <button
+              onClick={() => addToCart(datas)}
+              type="button"
+              className="w-[110px] h-[30px]"
+            >
               <span className={type === 3 ? "blue-btn" : "yellow-btn"}>
                 {" "}
                 Add To Cart
@@ -59,21 +69,21 @@ export default function ProductCardRowStyleTwo({ className, datas, type }) {
       </div>
       {/* quick-access-btns */}
       <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-[30px]  transition-all duration-300 ease-in-out">
-        <Link href="#">
+        <button>
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <QuickViewIco />
           </span>
-        </Link>
-        <Link href="#">
+        </button>
+        <button onClick={() => addToWishlist(datas)}>
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <ThinLove />
           </span>
-        </Link>
-        <Link href="#">
+        </button>
+        <button onClick={() => addToCompare(datas)}>
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <Compair />
           </span>
-        </Link>
+        </button>
       </div>
     </div>
   );

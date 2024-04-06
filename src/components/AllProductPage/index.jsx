@@ -12,7 +12,7 @@ import ProductsFilter from "./ProductsFilter";
 export default function AllProductPage() {
   const [filter, setFilter] = useState(null);
   const router = useRouter();
-  const { category } = router.query;
+  const { category, brand } = router.query;
   const {
     data: products,
     isLoading,
@@ -41,7 +41,11 @@ export default function AllProductPage() {
     if (category) {
       setCategoryName(category);
     }
-  }, [category]);
+
+    if (brand) {
+      setSelectedBrands(brand);
+    }
+  }, [category, brand]);
 
   const brandHandler = (e) => {
     const { name, value } = e.target;

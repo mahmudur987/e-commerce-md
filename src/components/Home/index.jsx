@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import img1 from "../../../public/assets/images/bg (1).jpg";
-import { useGetAllCategories } from "../../utils/Site";
+import { useGetAllCategories, useSiteSetting } from "../../utils/Site";
 import {
   useGetAllProduct,
   useGetNewProducts,
@@ -57,16 +57,8 @@ export default function Home() {
     isError: npIsError,
     error: npError,
   } = useGetNewProducts();
-
-  // const brands = products?.map((x) => x.brand_name);
-
-  // useEffect(() => {
-  //   if (categories) {
-  //     const randomIndex = Math.floor(Math.random() * categories?.length);
-  //     const randomObject = categories[4];
-  //     setCategory(randomObject);
-  //   }
-  // }, [categories]);
+  const { data, isError } = useSiteSetting();
+  console.log(data);
 
   const [ads, setAds] = useState(false);
   const adsHandle = () => {
@@ -119,21 +111,23 @@ export default function Home() {
         </ViewMoreTitle>
 
         {/* best seller */}
-        <ViewMoreTitle
-          className="best-sallers-section mb-[60px]"
-          seeMoreUrl="/sallers"
-          categoryTitle="Best Saller"
-        >
-          <BestSellers />
-        </ViewMoreTitle>
+        {data && !isError && data?.is_multi_vendor && (
+          <ViewMoreTitle
+            className="best-sallers-section mb-[60px]"
+            seeMoreUrl="/sallers"
+            categoryTitle="Best Saller"
+          >
+            <BestSellers />
+          </ViewMoreTitle>
+        )}
 
         {/* add */}
 
-        <ProductsAds
+        {/* <ProductsAds
           ads={[banner1, banner2]}
           sectionHeight="sm:h-[295px] h-full"
           className="products-ads-section mb-[60px]"
-        />
+        /> */}
 
         <SectionStyleOne
           categoryBackground={`/assets/images/section-category-2.jpg`}
@@ -149,12 +143,12 @@ export default function Home() {
           isError={ppIsError}
           error={ppError}
         />
-
+        {/* 
         <ProductsAds
           ads={[img1]}
           className="products-ads-section mb-[60px]"
           sectionHeight="sm:h-[295px] h-full"
-        />
+        /> */}
 
         {/* new arrival */}
         <SectionStyleThree

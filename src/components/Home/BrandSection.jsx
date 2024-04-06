@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useGetAllBrands } from "../../utils/products";
 import ErrorComponent from "../Error/ErrorComponent";
 import LoadingSpinner from "../Loader/LoadingSpinar";
@@ -27,7 +28,11 @@ export default function BrandSection({ className, sectionTitle }) {
             !isError &&
             !isLoading &&
             data.map((x) => (
-              <div className="item" key={x.id}>
+              <Link
+                href={`/all-products/?brand=${x.name}`}
+                className="item"
+                key={x.id}
+              >
                 <div className="w-full h-[130px] bg-white border border-primarygray flex justify-center items-center relative">
                   {x.image ? (
                     <Image
@@ -40,7 +45,7 @@ export default function BrandSection({ className, sectionTitle }) {
                     <h3 className="font-bold">{x.name}</h3>
                   )}
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>

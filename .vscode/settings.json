@@ -1,25 +1,25 @@
-{
-  // config related to code formatting
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[javascriptreact]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "javascript.validate.enable": false, //disable all built-in syntax checking
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.tslint": "explicit",
-    "source.organizeImports": "explicit"
-  },
-  "eslint.alwaysShowStatus": true,
-  // emmet
-  "emmet.triggerExpansionOnTab": true,
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  }
-}
+// {
+//   // config related to code formatting
+//   "editor.defaultFormatter": "esbenp.prettier-vscode",
+//   "editor.formatOnSave": true,
+//   "[javascript]": {
+//     "editor.formatOnSave": true,
+//     "editor.defaultFormatter": "vscode.typescript-language-features"
+//   },
+//   "[javascriptreact]": {
+//     "editor.formatOnSave": true,
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "javascript.validate.enable": false, //disable all built-in syntax checking
+//   "editor.codeActionsOnSave": {
+//     "source.fixAll.eslint": "explicit",
+//     "source.fixAll.tslint": "explicit",
+//     "source.organizeImports": "explicit"
+//   },
+//   "eslint.alwaysShowStatus": true,
+//   // emmet
+//   "emmet.triggerExpansionOnTab": true,
+//   "emmet.includeLanguages": {
+//     "javascript": "javascriptreact"
+//   }
+// }

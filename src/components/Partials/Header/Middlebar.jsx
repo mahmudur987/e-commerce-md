@@ -19,9 +19,11 @@ export default function Middlebar({ className, type }) {
   const { data, isError, isLoading } = useSiteSetting();
   const [logo, setLogo] = useState(null);
   useEffect(() => {
-    setLogo(imageUrl + data?.com_logo);
+    if (data) {
+      setLogo(imageUrl + data?.com_logo);
+    }
   }, [data]);
-  console.log(data);
+
   return (
     <div className={`w-full h-[86px] bg-white ${className}`}>
       <div className="container-x mx-auto h-full">
