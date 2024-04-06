@@ -27,7 +27,7 @@ export default function BrandSection({ className, sectionTitle }) {
             !isError &&
             !isLoading &&
             data.map((x) => (
-              <div className="item">
+              <div className="item" key={x.id}>
                 <div className="w-full h-[130px] bg-white border border-primarygray flex justify-center items-center relative">
                   {x.image ? (
                     <Image
