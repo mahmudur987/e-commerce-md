@@ -15,8 +15,10 @@ import Layout from "../Partials/Layout";
 import ProductView from "./ProductView";
 import Reviews from "./Reviews";
 import SallerInfo from "./SallerInfo";
+import { useSearchParams } from "next/navigation";
 export default function SingleProductPage() {
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const [tab, setTab] = useState("des");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -32,36 +34,25 @@ export default function SingleProductPage() {
     isLoading,
     isError,
     error,
-  } = useGetProductDetails(router.query.id);
-  const { data: products } = useGetRelatedProducts(router.query.id);
-
-  const [commnets, setComments] = useState([ ]);
+  } = useGetProductDetails(id);
+  const { data: products } = useGetRelatedProducts(id);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
-
-    if(singleProduct?.product_reviews.length===0){
-
-      setComments([])
-      
-      }
-
-  else{
-   const reviews = singleProduct?.product_reviews.map((x) => {
-    return (
-      {
-        id: x?.id,
-        author: x?.name,
-        comments: x?.review_text,
-        review: x?.rating,
-        image:x?.image
-      }
-   
-    );
-  });
-  setComments(reviews)
-
-}
- 
+    if (singleProduct?.product_reviews.length === 0) {
+      setComments([]);
+    } else {
+      const reviews = singleProduct?.product_reviews.map((x) => {
+        return {
+          id: x?.id,
+          author: x?.name,
+          comments: x?.review_text,
+          review: x?.rating,
+          image: x?.image,
+        };
+      });
+      setComments(reviews);
+    }
   }, [singleProduct]);
 
   const reviewAction = () => {
@@ -157,7 +148,7 @@ export default function SingleProductPage() {
                     </span>
                   </li>
 
-{/* seller info */}
+                  {/* seller info */}
 
                   {/* <li>
                     <span
@@ -223,7 +214,7 @@ export default function SingleProductPage() {
                       <Reviews
                         reviewLoading={reviewLoading}
                         reviewAction={reviewAction}
-                        comments={commnets}
+                        comments={comments}
                         name={name}
                         nameHandler={(e) => setName(e.target.value)}
                         email={email}

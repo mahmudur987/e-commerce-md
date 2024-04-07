@@ -4,7 +4,7 @@ import { WishlistContext } from "../../context/WishListContext";
 import InputQuantityCom from "../Helpers/InputQuantityCom";
 export default function ProductsTable({ className }) {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
-  console.log(wishlist);
+
   return (
     <div className={`w-full ${className || ""}`}>
       <div className="relative w-full overflow-x-auto border border-[#EDEDED]">
@@ -26,7 +26,10 @@ export default function ProductsTable({ className }) {
 
             {wishlist &&
               wishlist.map((item) => (
-                <tr  key={item.id} className="bg-white border-b hover:bg-gray-50">
+                <tr
+                  key={item.id}
+                  className="bg-white border-b hover:bg-gray-50"
+                >
                   <td className="pl-10  py-4 ">
                     <div className="flex space-x-6 items-center">
                       <div className="w-[80px] h-[80px] overflow-hidden flex justify-center items-center border border-[#EDEDED] relative">

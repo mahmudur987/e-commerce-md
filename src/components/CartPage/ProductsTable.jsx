@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import InputQuantityCom from "../Helpers/InputQuantityCom";
@@ -40,11 +41,14 @@ export default function ProductsTable({ className }) {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <div className="flex-1 flex flex-col">
+                      <Link
+                        href={`/singleproduct/${item.name}?id=${item.id}`}
+                        className="flex-1 flex flex-col"
+                      >
                         <p className="font-medium text-[15px] text-qblack">
                           {item.name}
                         </p>
-                      </div>
+                      </Link>
                     </div>
                   </td>
                   <td className="text-center py-4 px-2">

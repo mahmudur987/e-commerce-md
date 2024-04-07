@@ -1,10 +1,36 @@
+import { useContext } from "react";
 import BreadcrumbCom from "../BreadcrumbCom";
 import EmptyWishlistError from "../EmptyWishlistError";
 import PageTitle from "../Helpers/PageTitle";
 import Layout from "../Partials/Layout";
 import ProductsTable from "./ProductsTable";
+import { WishlistContext } from "../../context/WishListContext";
+import { CartContext } from "../../context/CartContext";
+const mergeAndRemoveDuplicates = (array1, array2) => {
+  const mergedArray = array1.concat(array2);
 
+  const uniqueIds = new Set(mergedArray.map((product) => product.id));
+
+  const resultArray = Array.from(uniqueIds).map((id) =>
+    mergedArray.find((product) => product.id === id)
+  );
+
+  return resultArray;
+};
 export default function Wishlist({ wishlist = true }) {
+  const { clearWishlist, wishlist: WishList } = useContext(WishlistContext);
+  const { cart, setCart } = useContext(CartContext);
+
+  const handleAddToCartFromWishList = () => {
+    const result = mergeAndRemoveDuplicates(cart, WishList);
+    if (WishList.length > 0 && result) {
+      localStorage.setItem("cart", JSON.stringify(result));
+
+      setCart(result);
+      clearWishlist();
+    }
+  };
+
   return (
     <Layout childrenClasses={wishlist ? "pt-0 pb-0" : ""}>
       {wishlist === false ? (
@@ -36,13 +62,19 @@ export default function Wishlist({ wishlist = true }) {
               <div className="w-full mt-[30px] flex sm:justify-end justify-start">
                 <div className="sm:flex sm:space-x-[30px] items-center">
                   <button type="button">
-                    <div className="w-full text-sm font-semibold text-qred mb-5 sm:mb-0">
+                    <div
+                      onClick={clearWishlist}
+                      className="w-full text-sm font-semibold text-qred mb-5 sm:mb-0"
+                    >
                       Clean Wishlist
                     </div>
                   </button>
                   <div className="w-[180px] h-[50px]">
                     <button type="button" className="yellow-btn">
-                      <div className="w-full text-sm font-semibold">
+                      <div
+                        onClick={handleAddToCartFromWishList}
+                        className="w-full text-sm font-semibold"
+                      >
                         Add to Cart All
                       </div>
                     </button>

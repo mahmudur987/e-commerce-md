@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useGetAllCategories } from "../../../utils/Site";
 import ErrorComponent from "../../Error/ErrorComponent";
+import NoDataToShow from "../../Error/NoData";
 
 export default function SearchBox({ className, type }) {
   const {
@@ -11,10 +12,10 @@ export default function SearchBox({ className, type }) {
     error: categoryError,
   } = useGetAllCategories();
 
-  const [categoryName, setCategoryName] = useState();
+  const [categoryName, setCategoryName] = useState(null);
   const [show, setShow] = useState(false);
 
-  console.log(categoryName);
+  // console.log(categoryName);
 
   return (
     <>

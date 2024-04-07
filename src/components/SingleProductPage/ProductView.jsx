@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Star from "../Helpers/icons/Star";
+import { CartContext } from "../../context/CartContext";
+import { WishlistContext } from "../../context/WishListContext";
+import { CompareContext } from "../../context/CompareContext";
 
 export function calculateAverageRating(reviews) {
   if (!reviews || !Array.isArray(reviews) || reviews.length === 0) {
@@ -29,53 +32,45 @@ export default function ProductView({
     image,
   } = singleProduct || {};
   const averageRating = calculateAverageRating(product_reviews);
-  // const productsImg = [
-  //   {
-  //     id: 1,
-  //     src: "product-details-1.png",
-  //     color: "#FFBC63",
-  //     image,
-  //   },
-  //   {
-  //     id: 2,
-  //     src: "product-details-2.png",
-  //     color: "#649EFF",
-  //     image,
-  //   },
-  //   {
-  //     id: 3,
-  //     src: "product-details-3.png",
-  //     image,
-  //     color: "#FFFFFF",
-  //   },
-  //   {
-  //     id: 4,
-  //     image,
-
-  //     src: "product-details-4.png",
-  //     color: "#FF7173",
-  //   },
-  //   {
-  //     id: 6,
-  //     src: "product-details-5.png",
-  //     color: "",
-  //     image,
-  //   },
-  // ];
-  console.log(product_slider);
+  const { addToCart, cart, increaseQuantity, decreaseQuantity } =
+    useContext(CartContext);
+  const { addToWishlist } = useContext(WishlistContext);
   const [src, setSrc] = useState(null);
+  const [isInCart, setIsInCart] = useState(false);
   const changeImgHandler = (current) => {
     setSrc(current);
   };
   const [quantity, setQuantity] = useState(1);
   const increment = () => {
-    setQuantity((prev) => prev + 1);
-  };
-  const decrement = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
+    if (isInCart) {
+      increaseQuantity(singleProduct.id);
+    } else {
+      setQuantity((pre) => pre + 1);
     }
   };
+  const decrement = () => {
+    if (isInCart) {
+      decreaseQuantity(singleProduct.id);
+    } else {
+      setQuantity((pre) => {
+        if (pre > 1) {
+          return pre - 1;
+        }
+      });
+    }
+  };
+  // console.log(cart);
+  useEffect(() => {
+    if (cart) {
+      const cartQuantity = cart?.find(
+        (x) => x.id === singleProduct.id
+      )?.quantity;
+      if (cartQuantity) {
+        setQuantity(cartQuantity);
+        setIsInCart(true);
+      }
+    }
+  }, [cart]);
 
   return (
     <div
@@ -277,7 +272,10 @@ export default function ProductView({
               </div>
             </div>
             <div className="w-[60px] h-full flex justify-center items-center border border-qgray-border">
-              <button type="button">
+              <button
+                onClick={() => addToWishlist(singleProduct)}
+                type="button"
+              >
                 <span>
                   <svg
                     width="24"
@@ -299,6 +297,7 @@ export default function ProductView({
             </div>
             <div className="flex-1 h-full">
               <button
+                onClick={() => addToCart(singleProduct, quantity)}
                 type="button"
                 className="black-btn text-sm font-semibold w-full h-full"
               >
