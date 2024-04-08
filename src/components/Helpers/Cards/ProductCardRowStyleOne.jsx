@@ -41,7 +41,11 @@ export default function ProductCardRowStyleTwo({ className, datas, type }) {
                 ))}
               </div>
             )}
-            <Link href="/single-product">
+            <Link
+              href={`/product/${datas.name.split(" ").join("-")}?id=${
+                datas.id
+              }`}
+            >
               <p className="title mb-2 sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
                 {datas.name}
               </p>

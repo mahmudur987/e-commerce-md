@@ -19,7 +19,6 @@ import Banner from "./Banner";
 import BestSellers from "./BestSellers";
 import BrandSection from "./BrandSection";
 import ProductsAds from "./ProductsAds";
-
 import banner1 from "../../../public/assets/banner/banner (1).jpg";
 import banner2 from "../../../public/assets/banner/banner (2).jpg";
 
@@ -30,14 +29,7 @@ export default function Home() {
     isError: TpIsError,
     error: TpError,
   } = useGetTopSellingProducts();
-  const [category, setCategory] = useState({});
 
-  const {
-    data: categories,
-    isLoading: categoryLoading,
-    isError: categoryIsError,
-    error: categoryError,
-  } = useGetAllCategories();
   const {
     data: products,
     isLoading: productsLoading,
@@ -58,7 +50,6 @@ export default function Home() {
     error: npError,
   } = useGetNewProducts();
   const { data, isError } = useSiteSetting();
-  console.log(data);
 
   const [ads, setAds] = useState(false);
   const adsHandle = () => {

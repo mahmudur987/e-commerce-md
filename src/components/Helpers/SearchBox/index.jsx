@@ -3,8 +3,13 @@ import { useState } from "react";
 import { useGetAllCategories } from "../../../utils/Site";
 import ErrorComponent from "../../Error/ErrorComponent";
 import NoDataToShow from "../../Error/NoData";
+import { useGetSearchProducts } from "../../../utils/products";
+import SearchResultsContainer from "./SerchReasult";
 
 export default function SearchBox({ className, type }) {
+  const [categoryName, setCategoryName] = useState(null);
+  const [search, setSearch] = useState("");
+  const [show, setShow] = useState(false);
   const {
     data: categories,
     isLoading: categoryLoading,
@@ -12,24 +17,25 @@ export default function SearchBox({ className, type }) {
     error: categoryError,
   } = useGetAllCategories();
 
-  const [categoryName, setCategoryName] = useState(null);
-  const [show, setShow] = useState(false);
-
-  // console.log(categoryName);
+  const { data, isLoading, isError, error } = useGetSearchProducts(
+    categoryName,
+    search
+  );
 
   return (
-    <>
+    <div div className=" relative">
       <div
         className={`w-full h-full flex items-center  border border-qgray-border bg-white ${
           className || ""
         }`}
       >
-        <div className="flex-1 bg-red-500 h-full">
+        <div className="flex-1  h-full">
           <form action="#" className="h-full">
             <input
               type="text"
               className="search-input"
               placeholder="Search Product..."
+              onChange={(e) => setSearch(e.target.value)}
             />
           </form>
         </div>
@@ -40,7 +46,7 @@ export default function SearchBox({ className, type }) {
             type="button"
             className="w-full text-xs font-500 text-qgray flex justify-between items-center"
           >
-            <span>All Categories</span>
+            <span>{categoryName ? categoryName : "All Categories"}</span>
             <span>
               <svg
                 width="10"
@@ -161,6 +167,16 @@ export default function SearchBox({ className, type }) {
           Search
         </button>
       </div>
-    </>
+
+      {data && !isLoading && !isError && search && (
+        <div className="absolute top-10 z-40  w-full bg-white min-h-14">
+          {data && !isLoading && !isError && (
+            <SearchResultsContainer products={data} />
+          )}
+
+          {isError && <NoDataToShow message={"Error"} />}
+        </div>
+      )}
+    </div>
   );
 }

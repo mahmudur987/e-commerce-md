@@ -117,7 +117,9 @@ export default function ProductCardStyleOne({ datas, type }) {
             ))}
           </div>
         )}
-        <Link href={`/singleproduct/${datas.name}?id=${datas.id}`}>
+        <Link
+          href={`/product/${datas.name.split(" ").join("-")}?id=${datas.id}`}
+        >
           <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
             {datas.name}
           </p>

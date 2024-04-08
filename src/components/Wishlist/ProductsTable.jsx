@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useContext } from "react";
 import { WishlistContext } from "../../context/WishListContext";
 import InputQuantityCom from "../Helpers/InputQuantityCom";
@@ -15,8 +16,8 @@ export default function ProductsTable({ className }) {
               <td className="py-4 pl-10 block whitespace-nowrap  w-[380px]">
                 product
               </td>
-              <td className="py-4 whitespace-nowrap text-center">color</td>
-              <td className="py-4 whitespace-nowrap text-center">size</td>
+              {/* <td className="py-4 whitespace-nowrap text-center">color</td>
+              <td className="py-4 whitespace-nowrap text-center">size</td> */}
               <td className="py-4 whitespace-nowrap text-center">price</td>
               <td className="py-4 whitespace-nowrap  text-center">quantity</td>
               <td className="py-4 whitespace-nowrap  text-center">total</td>
@@ -40,14 +41,19 @@ export default function ProductsTable({ className }) {
                           className="w-full h-full object-contain"
                         />
                       </div>
-                      <div className="flex-1 flex flex-col">
+                      <Link
+                        href={`/product/${item?.name.split(" ").join("-")}?id=${
+                          item?.id
+                        }`}
+                        className="flex-1 flex flex-col"
+                      >
                         <p className="font-medium text-[15px] text-qblack">
                           {item.name}
                         </p>
-                      </div>
+                      </Link>
                     </div>
                   </td>
-                  <td className="text-center py-4 px-2">
+                  {/* <td className="text-center py-4 px-2">
                     <div className=" flex justify-center items-center">
                       <span className="w-[20px] h-[20px] bg-[#E4BC87] block rounded-full"></span>
                     </div>
@@ -56,7 +62,7 @@ export default function ProductsTable({ className }) {
                     <div className="flex space-x-1 items-center justify-center">
                       <span className="text-[15px] font-normal">Small</span>
                     </div>
-                  </td>
+                  </td> */}
                   <td className="text-center py-4 px-2">
                     <div className="flex space-x-1 items-center justify-center">
                       <span className="text-[15px] font-normal">
