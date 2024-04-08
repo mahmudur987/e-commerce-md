@@ -83,12 +83,12 @@ export default function Login() {
                         Remember Me
                       </span>
                     </div>
-                    <a
+                    <Link
                       href="/forgot-password"
                       className="text-base text-qyellow"
                     >
                       Forgot Password
-                    </a>
+                    </Link>
                   </div>
                   <div className="signin-area mb-3.5">
                     <div className="flex justify-center">
@@ -99,7 +99,7 @@ export default function Login() {
                         <span>Log In</span>
                       </button>
                     </div>
-                    <a
+                    <Link
                       href="#"
                       className="w-full border border-qgray-border h-[50px] flex space-x-3  justify-center bg-[#FAFAFA] items-center"
                     >
@@ -151,7 +151,7 @@ export default function Login() {
                       <span className="text-[18px] text-qgraytwo font-normal">
                         Sign In with Google
                       </span>
-                    </a>
+                    </Link>
                   </div>
                   <div className="signup-area flex justify-center">
                     <p className="text-base text-qgraytwo font-normal">

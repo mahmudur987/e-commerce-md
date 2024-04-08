@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 import HomeFour from "../src/components/HomeFour";
 
 function HomeFourPage() {
-    return (
-        <HomeFour/>
-    );
+  return (
+    <>
+      <p>home four</p>
+      {/* // <HomeFour/> */}
+    </>
+  );
 }
 
 export default HomeFourPage;
