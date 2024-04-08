@@ -23,7 +23,7 @@ export default function SearchBox({ className, type }) {
   );
 
   return (
-    <div div className=" relative">
+    <div className=" relative">
       <div
         className={`w-full h-full flex items-center  border border-qgray-border bg-white ${
           className || ""

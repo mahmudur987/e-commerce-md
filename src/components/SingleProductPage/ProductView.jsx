@@ -70,7 +70,7 @@ export default function ProductView({
         setIsInCart(true);
       }
     }
-  }, [cart]);
+  }, [cart, singleProduct]);
 
   return (
     <div

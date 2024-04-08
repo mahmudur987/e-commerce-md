@@ -21,13 +21,13 @@ import ProfileTab from "./tabs/ProfileTab";
 import ReviewTab from "./tabs/ReviewTab";
 import SupportTab from "./tabs/SupportTab";
 import WishlistTab from "./tabs/WishlistTab";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Profile() {
   const [switchDashboard, setSwitchDashboard] = useState(false);
   const location = useRouter();
-  const getHashContent = location.asPath.split("#");
+  const getHashContent = location.asPath?.split("#");
   const [active, setActive] = useState("dashboard");
   useEffect(() => {
     setActive(
@@ -61,7 +61,7 @@ export default function Profile() {
                   >
                     <div
                       className={`w-[23px] h-[23px] bg-qblack rounded-full absolute top-[3px] transition-all duration-300 ease-in-out ${
-                        switchDashboard ? 'left-[44px]' : 'left-[4px]'
+                        switchDashboard ? "left-[44px]" : "left-[4px]"
                       }`}
                     ></div>
                   </button>
@@ -183,9 +183,7 @@ export default function Profile() {
                           <span>
                             <IcoLogout />
                           </span>
-                          <span className=" font-normal text-base">
-                            Logout
-                          </span>
+                          <span className=" font-normal text-base">Logout</span>
                         </div>
                       </Link>
                     </div>
@@ -194,9 +192,9 @@ export default function Profile() {
                 <div className="flex-1">
                   <div className="item-body dashboard-wrapper w-full">
                     {active === "dashboard" ? (
-                     <>
-                       <Dashboard />
-                     </>
+                      <>
+                        <Dashboard />
+                      </>
                     ) : active === "profile" ? (
                       <>
                         <ProfileTab />

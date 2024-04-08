@@ -42,9 +42,9 @@ export default function ProductsTable({ className }) {
                         />
                       </div>
                       <Link
-                        href={`/product/${item.name.split(" ").join("-")}?id=${
-                          item.id
-                        }`}
+                        href={`/product/${item?.name
+                          ?.split(" ")
+                          .join("-")}?id=${item.id}`}
                         className="flex-1 flex flex-col"
                       >
                         <p className="font-medium text-[15px] text-qblack">

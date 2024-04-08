@@ -42,7 +42,7 @@ export default function ProductCardRowStyleTwo({ className, datas, type }) {
               </div>
             )}
             <Link
-              href={`/product/${datas.name.split(" ").join("-")}?id=${
+              href={`/product/${datas?.name?.split(" ").join("-")}?id=${
                 datas.id
               }`}
             >
